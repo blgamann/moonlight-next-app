@@ -1,8 +1,16 @@
 import { gurmukhiMN } from "@/app/fonts";
 
-export function TextLogo({ children }: { children: React.ReactNode }) {
+export function TextLogo({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <div className={`${gurmukhiMN.className} text-[#39d4e7] text-xl`}>
+    <div
+      className={`${gurmukhiMN.className} text-[#39d4e7] text-xl ${className}`}
+    >
       {children}
     </div>
   );
