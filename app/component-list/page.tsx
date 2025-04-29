@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { TextComponent } from "@/components/text";
 import { Input } from "@/components/input";
-import Button from "@/components/button";
+import { Button } from "@/components/button";
 
 export default function Page() {
   const [selectedComponent, setSelectedComponent] = useState<string>("text");

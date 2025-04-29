@@ -1,6 +1,8 @@
+import { gurmukhiMN } from "@/app/fonts";
+
 export function TextLogo({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`font-['GurmukhiMN'] text-[#39d4e7] text-xl`}>
+    <div className={`${gurmukhiMN.className} text-[#39d4e7] text-xl`}>
       {children}
     </div>
   );
@@ -16,7 +18,6 @@ export function TextGradient({
   return (
     <div
       className={`
-        font-['Helvetica']
         bg-[linear-gradient(178.8deg,_#56c1ff,_#6ae8d8)]
         bg-clip-text
         text-transparent
@@ -35,11 +36,7 @@ export function TextBlack({
   children: React.ReactNode;
   className?: string;
 }) {
-  return (
-    <div className={`font-['Helvetica'] text-[#383838] ${className}`}>
-      {children}
-    </div>
-  );
+  return <div className={`text-[#383838] ${className}`}>{children}</div>;
 }
 
 export function TextGrey({
@@ -49,11 +46,7 @@ export function TextGrey({
   children: React.ReactNode;
   className?: string;
 }) {
-  return (
-    <div className={`font-['Helvetica'] text-[#929292] ${className}`}>
-      {children}
-    </div>
-  );
+  return <div className={`text-[#929292] ${className}`}>{children}</div>;
 }
 
 export function TextComponent() {

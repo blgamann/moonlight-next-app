@@ -1,6 +1,6 @@
 import { TextBlack, TextGradient, TextGrey, TextLogo } from "@/components/text";
 import { Input } from "@/components/input";
-import Button from "@/components/button";
+import { Button } from "@/components/button";
 import { BsMoonFill } from "react-icons/bs";
 import { AiOutlineMenu } from "react-icons/ai";
 
@@ -21,7 +21,7 @@ export default function Home() {
         <TextGrey className="text-base mt-8 font-normal">
           독후감을 공유하고 나의 소울 메이트를 찾아보세요
         </TextGrey>
-        <BsMoonFill color="#39d4e7" size={12} className="my-14" />
+        <BsMoonFill color="#39d4e7" size={12} className="my-16" />
         <TextBlack className="text-base mb-8 font-medium">
           어떤 분이 추천해주셨나요?
         </TextBlack>

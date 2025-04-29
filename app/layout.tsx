@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { helvetica } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={`${helvetica.className}`}>{children}</body>
     </html>
   );
 }
