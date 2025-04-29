@@ -1,6 +1,6 @@
 export function TextLogo({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`font-['GurmukhiMN'] text-[#39d4e7] text-[28px]`}>
+    <div className={`font-['GurmukhiMN'] text-[#39d4e7] text-xl`}>
       {children}
     </div>
   );

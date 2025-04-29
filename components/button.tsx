@@ -20,12 +20,12 @@ const Button: React.FC<ButtonProps> = ({
         hover:bg-[#32bfd0]
         text-white 
         font-['Helvetica']
-        text-[19px] 
-        py-5 
-        px-10 
+        text-base 
+        py-4 
+        px-6 
         rounded-[14px] 
         transition-colors
-        font-semibold
+        font-medium
         ${className}
       `}
     >

@@ -4,12 +4,12 @@ import localFont from "next/font/local";
 export const gurmukhiMN = localFont({
   src: [
     {
-      path: "../public/fonts/GurmukhiMN.ttf",
+      path: "../public/fonts/GurmukhiMN.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../public/fonts/GurmukhiMN-Bold.ttf",
+      path: "../public/fonts/GurmukhiMN-Bold.woff2",
       weight: "700",
       style: "normal",
     },
@@ -21,12 +21,12 @@ export const gurmukhiMN = localFont({
 export const helvetica = localFont({
   src: [
     {
-      path: "../public/fonts/Helvetica.ttf",
+      path: "../public/fonts/Helvetica.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../public/fonts/Helvetica-Bold.ttf",
+      path: "../public/fonts/Helvetica-Bold.woff2",
       weight: "700",
       style: "normal",
     },
@@ -38,12 +38,12 @@ export const helvetica = localFont({
 export const nanumMyeongjo = localFont({
   src: [
     {
-      path: "../public/fonts/NanumMyeongjo.ttf",
+      path: "../public/fonts/NanumMyeongjo.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../public/fonts/NanumMyeongjo-Bold.ttf",
+      path: "../public/fonts/NanumMyeongjo-Bold.woff2",
       weight: "700",
       style: "normal",
     },

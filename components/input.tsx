@@ -11,14 +11,14 @@ export function Input({ className, ...props }: InputProps) {
       <input
         className={`
           w-full
-          py-8 pr-4 pl-10
+          py-6 pr-4 pl-8
           border-gray-300
           border-[0.75px]
           focus:outline-none
           placeholder:text-[#929292]
           placeholder:font-['Helvetica']
           font-['Helvetica']
-          text-[22px]
+          text-base
           text-[#383838]
           ${className}
         `}
