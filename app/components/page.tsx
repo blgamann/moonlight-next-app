@@ -6,58 +6,83 @@ import {
   Input,
   ProfileComponent,
   Breather,
-  Quote,
   BookComponent,
   IndexComponent,
-  TextDarkGrey,
   ButtonComponent,
+  CardComponent,
+  SoullineComponent,
 } from "@/components";
+import { Menu, Menu2, icons } from "@/components/menu";
+
+const components = [
+  {
+    label: "book",
+    component: <BookComponent />,
+  },
+  {
+    label: "breather",
+    component: <Breather />,
+  },
+  {
+    label: "button",
+    component: <ButtonComponent />,
+  },
+  {
+    label: "card",
+    component: <CardComponent />,
+  },
+  {
+    label: "index",
+    component: <IndexComponent />,
+  },
+  {
+    label: "input",
+    component: <Input placeholder="추천인의 ID를 입력해주세요 (Input)" />,
+  },
+  {
+    label: "menu",
+    component: (
+      <div className="flex gap-16">
+        <div>
+          {icons.map((icon, index) => (
+            <Menu
+              key={index}
+              icon={icon.icon}
+              label={icon.label}
+              onClick={icon.onClick}
+            />
+          ))}
+        </div>
+        <div>
+          {icons.map((icon, index) => (
+            <Menu2
+              key={index}
+              icon={icon.icon}
+              label={icon.label}
+              onClick={icon.onClick}
+            />
+          ))}
+        </div>
+      </div>
+    ),
+  },
+  {
+    label: "profile",
+    component: <ProfileComponent />,
+  },
+  {
+    label: "soulline",
+    component: <SoullineComponent />,
+  },
+  {
+    label: "text",
+    component: <TextComponent />,
+  },
+];
 
 export default function Page() {
-  const [selectedComponent, setSelectedComponent] = useState<string>("text");
-
-  const components = [
-    {
-      label: "book",
-      component: <BookComponent />,
-    },
-    {
-      label: "breather",
-      component: <Breather />,
-    },
-    {
-      label: "button",
-      component: <ButtonComponent />,
-    },
-    {
-      label: "index",
-      component: <IndexComponent />,
-    },
-    {
-      label: "input",
-      component: <Input placeholder="추천인의 ID를 입력해주세요 (Input)" />,
-    },
-    {
-      label: "profile",
-      component: <ProfileComponent />,
-    },
-    {
-      label: "quote",
-      component: (
-        <Quote>
-          <TextDarkGrey>
-            {
-              "죽음은 신나게 놀고 있는데 엄마가 '얘야, 그만 놀고 들어와 밥 먹어라'하고 부르는 소리와 같습니다."
-            }
-          </TextDarkGrey>
-        </Quote>
-      ),
-    },
-    {
-      label: "text",
-      component: <TextComponent />,
-    },
-  ];
+  const [selectedComponent, setSelectedComponent] =
+    useState<string>("soulline");
 
   const selectedComponentData = components.find(
     (component) => component.label === selectedComponent

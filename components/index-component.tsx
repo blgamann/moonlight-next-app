@@ -1,7 +1,9 @@
+"use client";
+
 import data from "@/data.json";
 import { ProfileSm } from "./profile";
-import { IoMdArrowRoundBack, IoMdArrowRoundForward } from "react-icons/io";
 import { ButtonDeep } from "./button";
+import { IoMdArrowRoundBack, IoMdArrowRoundForward } from "react-icons/io";
 
 export function IndexTop({ children }: { children: React.ReactNode }) {
   return (

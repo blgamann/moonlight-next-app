@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { helvetica } from "./fonts";
 import "./globals.css";
 
-import { AiOutlineMenu } from "react-icons/ai";
-import { TextLogo } from "@/components/text";
+import { TextLogo, MenuComponent } from "@/components";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,10 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${helvetica.className} font-normal`}>
-        <div className="w-full fixed top-0 left-5 flex items-center gap-4 h-14 bg-white z-10">
-          <AiOutlineMenu color="#aeaeae" size={15} className="cursor-pointer" />
-          <TextLogo className="mt-[-2px]">moonlight</TextLogo>
+        <div className="w-full fixed top-0 flex items-center gap-1 h-14">
+          <TextLogo className="mt-[-2px] ml-13 cursor-pointer">
+            moonlight
+          </TextLogo>
         </div>
+        <MenuComponent />
         {children}
       </body>
     </html>

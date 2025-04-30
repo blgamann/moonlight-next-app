@@ -3,7 +3,7 @@ import {
   IndexTop,
   ProfileLg,
   ProfileSm,
-  Quote,
+  CardLeftLine,
   TextDarkGrey,
   BookSm,
   TextBlack,
@@ -24,17 +24,15 @@ export default function DiscoverPage() {
       </IndexTop>
       <ProfileLg url={profile.imageUrl} name={profile.name} className="mt-24" />
       <div className="flex justify-center mt-5">
-        <Quote>
+        <CardLeftLine>
           <TextDarkGrey>
             {
               "죽음은 신나게 놀고 있는데 엄마가 '얘야, 그만 놀고 들어와 밥 먹어라'하고 부르는 소리와 같습니다."
             }
           </TextDarkGrey>
-        </Quote>
+        </CardLeftLine>
       </div>
-      <div className="flex justify-center">
-        <Breather className="my-18" />
-      </div>
+      <Breather className="my-18" />
       <div className="flex">
         <BookSm title={book.title} url={book.imageUrl} />
       </div>
@@ -45,6 +43,7 @@ export default function DiscoverPage() {
       <TextBlack className="text-base border-t-[0.75px] border-black/15 mt-14 pt-8 whitespace-pre-line">
         {answer.answer_text}
       </TextBlack>
+      <Breather className="my-18" />
       <IndexBottomButton />
     </div>
   );
