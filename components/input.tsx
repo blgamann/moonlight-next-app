@@ -22,7 +22,6 @@ export function Input({ className, ...props }: InputProps) {
           text-[#383838]
           ${className}
         `}
-        placeholder="추천인의 ID를 입력해주세요"
         {...props}
       />
       <div
