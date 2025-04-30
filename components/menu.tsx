@@ -109,9 +109,19 @@ export function Menu2({
   );
 }
 
+export function MenuBar2() {
+  return (
+    <div className="fixed flex flex-col mt-20 p-1">
+      {icons.map(({ icon, label, onClick }, index) => (
+        <Menu2 key={index} icon={icon} label={label} onClick={onClick} />
+      ))}
+    </div>
+  );
+}
+
 export function MenuBar({ onMenuClick }: { onMenuClick: () => void }) {
   return (
-    <div className="fixed flex top-[4px] flex-col p-1 z-10">
+    <div className="fixed flex pt-2 pl-1 flex-col z-10">
       <div
         className="flex items-center justify-center w-10 h-10 hover:rounded-full cursor-pointer hover:bg-gray-100 ml-1 mb-10"
         onClick={onMenuClick}
@@ -127,19 +137,9 @@ export function MenuBar({ onMenuClick }: { onMenuClick: () => void }) {
   );
 }
 
-export function MenuBar2() {
-  return (
-    <div className="fixed flex flex-col mt-20 p-1">
-      {icons.map(({ icon, label, onClick }, index) => (
-        <Menu2 key={index} icon={icon} label={label} onClick={onClick} />
-      ))}
-    </div>
-  );
-}
-
 export function MenuBarExpanded({ onMenuClick }: { onMenuClick: () => void }) {
   return (
-    <div className="fixed flex top-[4px] flex-col p-1 z-10">
+    <div className="fixed flex pt-2 pl-1 flex-col z-10 bg-white">
       <div
         className="flex items-center justify-center w-10 h-10 hover:rounded-full cursor-pointer hover:bg-gray-100 ml-1 mb-10"
         onClick={onMenuClick}
@@ -153,21 +153,7 @@ export function MenuBarExpanded({ onMenuClick }: { onMenuClick: () => void }) {
   );
 }
 
-// export function MenuComponent() {
-//   return (
-//     <div className="flex gap-16">
-//       <MenuBar2 />
-//       <div className="ml-36">
-//         <MenuBar />
-//       </div>
-//       <div className="ml-24">
-//         <MenuBarExpanded />
-//       </div>
-//     </div>
-//   );
-// }
-
-export function MenuComponent() {
+export function Menus() {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen((prev) => !prev);
 

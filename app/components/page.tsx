@@ -81,15 +81,14 @@ const components = [
 ];
 
 export default function Page() {
-  const [selectedComponent, setSelectedComponent] =
-    useState<string>("soulline");
+  const [selectedComponent, setSelectedComponent] = useState<string>("card");
 
   const selectedComponentData = components.find(
     (component) => component.label === selectedComponent
   );
 
   return (
-    <div className="flex flex-col items-center justify-start pt-10 h-screen max-w-[900px] w-full mx-auto mt-12">
+    <div className="flex flex-col items-center justify-start pt-10 h-screen w-full mx-auto mt-12">
       <div className="flex space-x-4 mb-8 w-full items-center justify-center">
         {components.map((component) => (
           <span

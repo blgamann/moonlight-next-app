@@ -12,6 +12,8 @@ import {
   TextGrey,
   Breather,
   IndexBottomButton,
+  CardSouline,
+  CardMutualBooks,
 } from "@/components";
 
 export default function DiscoverPage() {
@@ -19,8 +21,15 @@ export default function DiscoverPage() {
   const book = data.books[0];
   const answer = data.book_answers[0];
   const question = data.book_questions[0];
+
+  const profiles = data.profiles;
+  const books = data.books.map((book) => ({
+    url: book.imageUrl,
+    title: book.title,
+  }));
+
   return (
-    <div className="flex flex-col w-full max-w-[680px] mx-auto px-8 mb-24">
+    <div className="flex flex-col w-full max-w-[680px] mx-auto px-8 mb-28">
       <IndexTop>
         <ProfileSm url={profile.imageUrl} name={profile.name} />
       </IndexTop>
@@ -46,6 +55,10 @@ export default function DiscoverPage() {
         {answer.answer_text}
       </TextBlack>
       <Breather className="my-18" />
+      <div className="flex flex-col gap-14">
+        <CardSouline profiles={profiles} />
+        <CardMutualBooks books={books} />
+      </div>
       <IndexBottomButton onBack={() => {}} onForward={() => {}} />
     </div>
   );

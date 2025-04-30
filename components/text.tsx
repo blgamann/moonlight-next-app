@@ -37,6 +37,16 @@ export function TextGradient({
   );
 }
 
+export function TextCyan({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return <div className={`text-[#39d4e7] ${className}`}>{children}</div>;
+}
+
 export function TextBlack({
   children,
   className,
@@ -71,6 +81,7 @@ export function TextComponent() {
   return (
     <div className="flex flex-col gap-4">
       <TextLogo>moonlight (TextLogo)</TextLogo>
+      <TextCyan>초대 기반 (TextCyan)</TextCyan>
       <TextGradient>책을 통해, 마음이 만나는 곳 (TextGradient)</TextGradient>
       <TextBlack>문 라이트에 오신 것을 환영합니다 (TextBlack)</TextBlack>
       <TextDarkGrey>

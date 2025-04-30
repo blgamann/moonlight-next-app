@@ -7,7 +7,6 @@ import { ProfileMdSoulline } from "./profile";
 
 const profiles = data.profiles;
 
-// --- Profile 타입 정의 ---
 export interface SoullineProps {
   imageUrl: string;
   name: string;
@@ -17,10 +16,10 @@ export interface SoullineProps {
 export function Soulline({ profiles }: { profiles: SoullineProps[] }) {
   return (
     <div className="flex flex-col items-center w-full">
-      <div className="flex items-center w-full h-20">
+      <div className="flex items-center w-full">
         {profiles.map((profile, idx) => (
           <React.Fragment key={profile.name}>
-            <div className="relative w-19 h-20 flex-shrink-0">
+            <div className="relative w-18 flex-shrink-0">
               <ProfileMdSoulline url={profile.imageUrl} />
             </div>
             {idx < profiles.length - 1 && (
@@ -29,20 +28,6 @@ export function Soulline({ profiles }: { profiles: SoullineProps[] }) {
                 aria-hidden="true"
               />
             )}
-          </React.Fragment>
-        ))}
-      </div>
-
-      <div className="flex items-start w-full mt-2">
-        {profiles.map((profile, idx) => (
-          <React.Fragment key={profile.name}>
-            <a
-              href={`/profile`}
-              className="w-20 text-center hover:underline text-white/95 text-sm font-medium"
-            >
-              {profile.name}
-            </a>
-            {idx < profiles.length - 1 && <div className="flex-1" />}
           </React.Fragment>
         ))}
       </div>

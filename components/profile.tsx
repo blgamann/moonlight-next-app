@@ -54,7 +54,7 @@ export function ProfileMd({ url, name, className }: ProfileProps) {
 export function ProfileMdSoulline({ url, name, className }: ProfileProps) {
   return (
     <div className={`flex flex-col items-center ${className}`}>
-      <div className="w-[77px] h-[77px] flex items-center justify-center rounded-full bg-white border-[3px] border-[#6edfee]">
+      <div className="w-[74px] h-[74px] flex items-center justify-center rounded-full bg-white border-[2.5px] border-[#6edfee]">
         <ProfileImage size={64} url={url} />
       </div>
       {name && (
@@ -100,7 +100,7 @@ export function ProfileComponent() {
   const profile = data.profiles[0];
 
   return (
-    <div className="flex flex-col justify-center items-center gap-6">
+    <div className="flex flex-col justify-center items-center gap-12">
       <ProfileSm url={profile.imageUrl} />
       <ProfileSm url={profile.imageUrl} name={profile.name} />
       <ProfileMd url={profile.imageUrl} />
