@@ -1,3 +1,5 @@
+"use client";
+
 import data from "@/data.json";
 import {
   IndexTop,
@@ -44,7 +46,7 @@ export default function DiscoverPage() {
         {answer.answer_text}
       </TextBlack>
       <Breather className="my-18" />
-      <IndexBottomButton />
+      <IndexBottomButton onBack={() => {}} onForward={() => {}} />
     </div>
   );
 }
