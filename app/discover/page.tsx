@@ -29,7 +29,7 @@ export default function DiscoverPage() {
   }));
 
   return (
-    <div className="flex flex-col w-full max-w-[680px] mx-auto px-8 mb-28 mt-12">
+    <div className="flex flex-col w-full max-w-[680px] mx-auto px-8 mb-28 mt-26">
       <IndexTop>
         <ProfileSm url={profile.imageUrl} name={profile.name} />
       </IndexTop>

@@ -45,7 +45,7 @@ export default function GardenClient({
     : "flex flex-col items-center flex-1 justify-center";
 
   return (
-    <div className={`w-full max-w-[800px] mb-36 ${containerClasses}`}>
+    <div className={`w-full max-w-[800px] mt-14 mb-36 ${containerClasses}`}>
       {!submitted && (
         <div className="flex flex-col items-center justify-center h-48">
           <h2 className="text-2xl font-medium text-center">

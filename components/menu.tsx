@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { useIsGardenPage } from "@/hooks/useIsGardenPage";
 
 import { IoSparklesOutline } from "react-icons/io5";
 import { IoBookOutline } from "react-icons/io5";
@@ -128,6 +129,8 @@ export function MenuBar2() {
 
 export function MenuBar({ onMenuClick }: { onMenuClick: () => void }) {
   const router = useRouter();
+  const isGardenPage = useIsGardenPage();
+
   return (
     <div className="fixed flex pt-2 pl-1 flex-col z-10">
       <div
@@ -136,17 +139,18 @@ export function MenuBar({ onMenuClick }: { onMenuClick: () => void }) {
       >
         <AiOutlineMenu color="#aeaeae" size={18} />
       </div>
-      <div className="hidden md:flex md:flex-col bg-white">
-        {icons.map(({ icon, label, path }, index) => (
-          <Menu
-            key={index}
-            icon={icon}
-            label={label}
-            onClick={() => {
-              router.push(path);
-            }}
-          />
-        ))}
+      <div className={`hidden md:flex md:flex-col bg-white`}>
+        {!isGardenPage &&
+          icons.map(({ icon, label, path }, index) => (
+            <Menu
+              key={index}
+              icon={icon}
+              label={label}
+              onClick={() => {
+                router.push(path);
+              }}
+            />
+          ))}
       </div>
     </div>
   );

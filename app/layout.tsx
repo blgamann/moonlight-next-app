@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { helvetica } from "./fonts";
 import "./globals.css";
 
-import { TextLogo, Menus } from "@/components";
+import { Header, Menus } from "@/components";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,13 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${helvetica.className} font-normal bg-white`}>
-        <div className="w-full fixed top-0 flex items-center gap-1 h-14 bg-white z-10">
-          <TextLogo className="mt-[-2px] ml-13 cursor-pointer">
-            moonlight
-          </TextLogo>
-        </div>
+        <Header />
         <Menus />
-        <div className="pt-14">{children}</div>
+        {children}
       </body>
     </html>
   );
