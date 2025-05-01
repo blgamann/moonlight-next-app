@@ -1,4 +1,5 @@
 import { gurmukhiMN } from "@/app/fonts";
+import Link from "next/link";
 
 export function TextLogo({
   children,
@@ -8,11 +9,13 @@ export function TextLogo({
   className?: string;
 }) {
   return (
-    <div
-      className={`${gurmukhiMN.className} text-[#39d4e7] text-xl ${className}`}
-    >
-      {children}
-    </div>
+    <Link href="/discover">
+      <div
+        className={`${gurmukhiMN.className} text-[#39d4e7] text-xl ${className}`}
+      >
+        {children}
+      </div>
+    </Link>
   );
 }
 

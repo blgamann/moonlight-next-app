@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 import { IoSparklesOutline } from "react-icons/io5";
 import { IoBookOutline } from "react-icons/io5";
@@ -17,33 +18,33 @@ const profile = data.profiles[0];
 export const icons = [
   {
     icon: <IoSparklesOutline size={20} color="#aeaeae" />,
-    onClick: () => {},
     label: "발견",
+    path: "/discover",
   },
   {
     icon: <IoBookOutline size={20} color="#aeaeae" />,
-    onClick: () => {},
     label: "가든 검색",
+    path: "/garden",
   },
   {
     icon: <GoInfinity size={20} color="#aeaeae" />,
-    onClick: () => {},
     label: "소울링크",
+    path: "/soullink",
   },
   {
     icon: <IoNotificationsOutline size={20} color="#aeaeae" />,
-    onClick: () => {},
     label: "알림",
+    path: "/notification",
   },
   {
     icon: <ProfileSm url={profile.imageUrl} />,
-    onClick: () => {},
     label: "프로필",
+    path: "/profile",
   },
   {
     icon: <HiOutlineMoon size={20} color="#aeaeae" />,
-    onClick: () => {},
     label: "나의 관심",
+    path: "/collection",
   },
 ];
 
@@ -110,16 +111,23 @@ export function Menu2({
 }
 
 export function MenuBar2() {
+  const router = useRouter();
   return (
     <div className="fixed flex flex-col mt-20 p-1">
-      {icons.map(({ icon, label, onClick }, index) => (
-        <Menu2 key={index} icon={icon} label={label} onClick={onClick} />
+      {icons.map(({ icon, label, path }, index) => (
+        <Menu2
+          key={index}
+          icon={icon}
+          label={label}
+          onClick={() => router.push(path)}
+        />
       ))}
     </div>
   );
 }
 
 export function MenuBar({ onMenuClick }: { onMenuClick: () => void }) {
+  const router = useRouter();
   return (
     <div className="fixed flex pt-2 pl-1 flex-col z-10">
       <div
@@ -129,8 +137,15 @@ export function MenuBar({ onMenuClick }: { onMenuClick: () => void }) {
         <AiOutlineMenu color="#aeaeae" size={18} />
       </div>
       <div className="hidden md:flex md:flex-col bg-white">
-        {icons.map(({ icon, label, onClick }, index) => (
-          <Menu key={index} icon={icon} label={label} onClick={onClick} />
+        {icons.map(({ icon, label, path }, index) => (
+          <Menu
+            key={index}
+            icon={icon}
+            label={label}
+            onClick={() => {
+              router.push(path);
+            }}
+          />
         ))}
       </div>
     </div>
@@ -138,6 +153,7 @@ export function MenuBar({ onMenuClick }: { onMenuClick: () => void }) {
 }
 
 export function MenuBarExpanded({ onMenuClick }: { onMenuClick: () => void }) {
+  const router = useRouter();
   return (
     <div className="fixed flex pt-2 pl-1 flex-col z-10 bg-white">
       <div
@@ -146,8 +162,16 @@ export function MenuBarExpanded({ onMenuClick }: { onMenuClick: () => void }) {
       >
         <AiOutlineMenu color="#aeaeae" size={18} />
       </div>
-      {icons.map(({ icon, label, onClick }, index) => (
-        <MenuExpanded key={index} icon={icon} label={label} onClick={onClick} />
+      {icons.map(({ icon, label, path }, index) => (
+        <MenuExpanded
+          key={index}
+          icon={icon}
+          label={label}
+          onClick={() => {
+            router.push(path);
+            onMenuClick();
+          }}
+        />
       ))}
     </div>
   );
@@ -156,6 +180,25 @@ export function MenuBarExpanded({ onMenuClick }: { onMenuClick: () => void }) {
 export function Menus() {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen((prev) => !prev);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
 
   return (
     <>
@@ -172,6 +215,7 @@ export function Menus() {
 
       {/* Expanded */}
       <div
+        ref={menuRef}
         className={`
           fixed top-0 left-0 h-full w-50 bg-white shadow-lg z-20
           transform transition-transform duration-300

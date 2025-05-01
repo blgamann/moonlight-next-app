@@ -33,15 +33,15 @@ export function BookSearchItem({
           <BookLg title={book.title} url={book.image} />
           <div className="flex flex-col ml-6 justify-between">
             <div className="flex flex-col gap-1 mt-1">
-              <TextBlack className="text-xl font-semibold group-hover:underline">
+              <TextBlack className="text-lg font-semibold group-hover:underline">
                 {book.title}
               </TextBlack>
-              <TextDarkGrey className="text-base font-medium">
+              <TextDarkGrey className="text-sm font-medium">
                 {formatAuthors(book.author)}
               </TextDarkGrey>
-              <TextGrey className="text-sm">{book.publisher}</TextGrey>
+              <TextGrey className="text-xs">{book.publisher}</TextGrey>
             </div>
-            <TextDarkGrey className="text-sm mb-1">
+            <TextDarkGrey className="text-xs mb-1">
               {hasGarden(garden)
                 ? "멤버 327명 · 질문 13개 · 답변 501개 · 소울링크 76쌍"
                 : "멤버 327명 · 질문 13개 · 답변 501개 · 소울링크 76쌍"}

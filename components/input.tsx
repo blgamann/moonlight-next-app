@@ -12,6 +12,7 @@ export function Input({ className, ...props }: InputProps) {
   return (
     <div className="relative w-full shadow-[0px_7px_25px_0px_rgba(0,0,0,0.04)]">
       <input
+        suppressHydrationWarning={true}
         className={`
           w-full
           py-6 pr-4 pl-8
@@ -45,7 +46,6 @@ interface InputGardenProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "onSubmit"> {
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  /** 검색을 실행할 순수 콜백 (이벤트는 내부에서 preventDefault 처리) */
   onSubmit: () => void;
   className?: string;
 }
@@ -71,6 +71,7 @@ export function InputGarden({
       `}
     >
       <input
+        suppressHydrationWarning={true}
         type="text"
         value={value}
         onChange={onChange}
@@ -111,7 +112,7 @@ export function InputComponent() {
       <InputGarden
         value=""
         onChange={() => {}}
-        onSubmit={() => {}} // Use renamed prop
+        onSubmit={() => {}}
         placeholder="가든 검색 (InputGarden)"
       />
     </div>

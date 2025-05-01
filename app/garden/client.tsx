@@ -41,20 +41,20 @@ export default function GardenClient({
   };
 
   const containerClasses = submitted
-    ? "flex flex-col items-center mt-8"
+    ? "flex flex-col items-center flex-1 mt-8"
     : "flex flex-col items-center flex-1 justify-center";
 
   return (
-    <div className={`w-full max-w-[600px] ${containerClasses}`}>
-      <div className="flex flex-col items-center justify-center h-52">
-        {!submitted && (
+    <div className={`w-full max-w-[800px] mb-36 ${containerClasses}`}>
+      {!submitted && (
+        <div className="flex flex-col items-center justify-center h-48">
           <h2 className="text-2xl font-medium text-center">
             {"읽은 책을 검색하고, "}
             <br className="md:hidden" />
             {"새로운 대화를 시작해보세요"}
           </h2>
-        )}
-      </div>
+        </div>
+      )}
 
       <InputGarden
         value={query}
@@ -64,15 +64,19 @@ export default function GardenClient({
       />
 
       {loading ? (
-        <p className="mt-16">검색 중…</p>
+        <div className="flex flex-1 items-center justify-center mt-8">
+          검색 중…
+        </div>
       ) : submitted && results.length === 0 ? (
-        <p className="mt-16">검색 결과가 없습니다</p>
+        <div className="flex flex-1 items-center justify-center mt-8">
+          검색 결과가 없습니다
+        </div>
       ) : (
         results.length > 0 && (
           <ul className="mt-20 w-full space-y-4">
             <div className="flex items-center ml-1">
-              <TextCyan className="font-medium text-xl">{submitted}</TextCyan>
-              <TextBlack className="font-medium text-xl">
+              <TextCyan className="font-medium text-lg">{submitted}</TextCyan>
+              <TextBlack className="font-medium text-lg">
                 에 대한 {results.length}개의 검색 결과
               </TextBlack>
             </div>
