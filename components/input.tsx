@@ -94,7 +94,7 @@ export function InputGarden({
 
       <button
         type="submit"
-        className="absolute inset-y-0 right-3 flex items-center"
+        className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
       >
         <div className="flex items-center justify-center h-10 w-10 rounded-full bg-[#39d4e7]">
           <HiOutlineSearch className="w-6 h-6 text-white" />

@@ -1,7 +1,8 @@
 export default async function BookPage({
   params,
 }: {
-  params: { isbn: string };
+  params: Promise<{ isbn: string }>;
 }) {
-  return <div>{params.isbn}</div>;
+  const { isbn } = await params;
+  return <div>{isbn}</div>;
 }

@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { InputGarden, TextBlack, TextCyan } from "@/components";
 import { BookItem } from "@/lib/book";
 import { BookSearchItem } from "@/components/item";
-import Link from "next/link";
 
 export default function GardenClient({
   initialQuery = "",
@@ -47,13 +46,15 @@ export default function GardenClient({
 
   return (
     <div className={`w-full max-w-[600px] ${containerClasses}`}>
-      {!submitted && (
-        <h2 className="text-2xl font-medium mb-6 text-center">
-          읽은 책을 검색하고,
-          <br />
-          새로운 대화를 시작해보세요
-        </h2>
-      )}
+      <div className="flex flex-col items-center justify-center h-52">
+        {!submitted && (
+          <h2 className="text-2xl font-medium text-center">
+            {"읽은 책을 검색하고, "}
+            <br className="md:hidden" />
+            {"새로운 대화를 시작해보세요"}
+          </h2>
+        )}
+      </div>
 
       <InputGarden
         value={query}

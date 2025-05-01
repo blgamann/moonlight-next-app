@@ -2,12 +2,15 @@ import GardenClient from "./client";
 
 export const revalidate = 86400; // 24 hours cache
 
-export default function GardenPage({
+type SearchParams = Promise<{ q?: string }>;
+
+export default async function GardenPage({
   searchParams,
 }: {
-  searchParams: { q?: string };
+  searchParams: SearchParams;
 }) {
-  const initialQuery = searchParams.q || "";
+  const resolvedSearchParams = await searchParams;
+  const initialQuery = resolvedSearchParams.q || "";
 
   return (
     <div

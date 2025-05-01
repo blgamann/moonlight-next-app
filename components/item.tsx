@@ -15,7 +15,7 @@ export function BookSearchItem({
   };
 
   // it will be true if the garden table is created
-  const hasGarden = (garden: Garden): boolean => {
+  const hasGarden = (garden: Garden | null): boolean => {
     if (!garden) {
       return false;
     }
@@ -42,8 +42,9 @@ export function BookSearchItem({
               <TextGrey className="text-sm">{book.publisher}</TextGrey>
             </div>
             <TextDarkGrey className="text-sm mb-1">
-              {/* {hasGarden(garden) ? "가든 채팅 참여하기" : "가든 채팅 시작하기"} */}
-              멤버 327명 · 질문 13개 · 답변 501개 · 소울링크 76쌍
+              {hasGarden(garden)
+                ? "멤버 327명 · 질문 13개 · 답변 501개 · 소울링크 76쌍"
+                : "멤버 327명 · 질문 13개 · 답변 501개 · 소울링크 76쌍"}
             </TextDarkGrey>
             {/* {hasGarden(garden) && (
             <TextBlack className="text-sm mb-1">
