@@ -16,7 +16,7 @@ export function BookSm({ url, title }: BookProps) {
         width={20}
         height={0}
         style={{ height: "auto" }}
-        className="object-contain rounded-xs"
+        className="object-contain"
       />
       <TextDarkGrey className="text-sm ml-2">{title}</TextDarkGrey>
     </div>
@@ -32,7 +32,7 @@ export function BookLg({ url, title }: BookProps) {
         width={100}
         height={0}
         style={{ height: "auto" }}
-        className="object-contain rounded-md"
+        className="object-contain"
       />
     </div>
   );

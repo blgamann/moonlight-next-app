@@ -128,7 +128,7 @@ export function MenuBar({ onMenuClick }: { onMenuClick: () => void }) {
       >
         <AiOutlineMenu color="#aeaeae" size={18} />
       </div>
-      <div className="hidden sm:flex sm:flex-col bg-white">
+      <div className="hidden md:flex md:flex-col bg-white">
         {icons.map(({ icon, label, onClick }, index) => (
           <Menu key={index} icon={icon} label={label} onClick={onClick} />
         ))}

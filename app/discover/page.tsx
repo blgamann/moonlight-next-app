@@ -29,13 +29,13 @@ export default function DiscoverPage() {
   }));
 
   return (
-    <div className="flex flex-col w-full max-w-[680px] mx-auto px-8 mb-28">
+    <div className="flex flex-col w-full max-w-[680px] mx-auto px-8 mb-28 mt-12">
       <IndexTop>
         <ProfileSm url={profile.imageUrl} name={profile.name} />
       </IndexTop>
-      <ProfileLg url={profile.imageUrl} name={profile.name} className="mt-24" />
+      <ProfileLg url={profile.imageUrl} name={profile.name} />
       <div className="flex justify-center mt-5">
-        <CardLeftLine>
+        <CardLeftLine className="max-w-[450px]">
           <TextDarkGrey>
             {
               "죽음은 신나게 놀고 있는데 엄마가 '얘야, 그만 놀고 들어와 밥 먹어라'하고 부르는 소리와 같습니다."
@@ -56,7 +56,7 @@ export default function DiscoverPage() {
       </TextBlack>
       <Breather className="my-18" />
       <div className="flex flex-col gap-14">
-        <CardSouline profiles={profiles} />
+        <CardSouline profiles={profiles.slice(0, 2)} />
         <CardMutualBooks books={books} />
       </div>
       <IndexBottomButton onBack={() => {}} onForward={() => {}} />

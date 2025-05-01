@@ -3,7 +3,6 @@
 import { useState } from "react";
 import {
   TextComponent,
-  Input,
   ProfileComponent,
   Breather,
   BookComponent,
@@ -11,6 +10,7 @@ import {
   ButtonComponent,
   CardComponent,
   SoullineComponent,
+  InputComponent,
 } from "@/components";
 import { Menu, Menu2, icons } from "@/components/menu";
 
@@ -37,7 +37,7 @@ const components = [
   },
   {
     label: "input",
-    component: <Input placeholder="추천인의 ID를 입력해주세요 (Input)" />,
+    component: <InputComponent />,
   },
   {
     label: "menu",

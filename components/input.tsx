@@ -1,9 +1,12 @@
-import React from "react";
+"use client";
 
-type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
-  // 추가적인 props가 필요하다면 여기에 정의할 수 있습니다.
-  // 예: error?: boolean;
-};
+import React from "react";
+import { HiOutlineSearch } from "react-icons/hi";
+
+// Define InputProps
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  className?: string;
+}
 
 export function Input({ className, ...props }: InputProps) {
   return (
@@ -33,6 +36,83 @@ export function Input({ className, ...props }: InputProps) {
           w-[3.5px]
           bg-[linear-gradient(178.8deg,_#56c1ff,_#6ae8d8)]
         "
+      />
+    </div>
+  );
+}
+
+interface InputGardenProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "onSubmit"> {
+  value: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  /** 검색을 실행할 순수 콜백 (이벤트는 내부에서 preventDefault 처리) */
+  onSubmit: () => void;
+  className?: string;
+}
+
+export function InputGarden({
+  value,
+  onChange,
+  onSubmit,
+  className,
+  ...props
+}: InputGardenProps) {
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit();
+      }}
+      className={`
+        relative w-full
+        rounded-full
+        shadow-[0px_7px_25px_0px_rgba(0,0,0,0.04)]
+        ${className}
+      `}
+    >
+      <input
+        type="text"
+        value={value}
+        onChange={onChange}
+        {...props}
+        className={`
+          w-full
+          rounded-full
+          border-gray-300
+          border-[0.75px]
+          py-4
+          pl-7
+          pr-16
+          focus:outline-none
+          placeholder:text-[#929293]
+          placeholder:font-['Helvetica']
+          font-['Helvetica']
+          text-base
+          text-[#383838]
+        `}
+      />
+
+      <button
+        type="submit"
+        className="absolute inset-y-0 right-3 flex items-center"
+      >
+        <div className="flex items-center justify-center h-10 w-10 rounded-full bg-[#39d4e7]">
+          <HiOutlineSearch className="w-6 h-6 text-white" />
+        </div>
+      </button>
+    </form>
+  );
+}
+
+export function InputComponent() {
+  return (
+    <div className="flex flex-col gap-2 w-full">
+      <Input placeholder="추천인의 ID를 입력해주세요 (Input)" />
+      <InputGarden
+        value=""
+        onChange={() => {}}
+        onSubmit={() => {}} // Use renamed prop
+        placeholder="가든 검색 (InputGarden)"
       />
     </div>
   );

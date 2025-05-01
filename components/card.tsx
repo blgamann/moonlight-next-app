@@ -8,9 +8,17 @@ import { BookProps, BookLg } from "./book";
 
 import data from "@/data.json";
 
-export function CardLeftLine({ children }: { children: React.ReactNode }) {
+export function CardLeftLine({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <div className="w-full relative pl-9 pr-6 py-6.5 border-[0.75px] border-gray-300 border-l-0 shadow-[0px_7px_25px_0px_rgba(0,0,0,0.04)]">
+    <div
+      className={`w-full relative pl-9 pr-6 py-6.5 border-[0.75px] border-gray-300 border-l-0 shadow-[0px_7px_25px_0px_rgba(0,0,0,0.04)] ${className}`}
+    >
       <div
         className="
           absolute
@@ -35,7 +43,7 @@ export function CardTopLine({
 }) {
   return (
     <div
-      className={`w-full relative px-6 border-[0.75px] border-gray-300 border-t-0 shadow-[0px_7px_25px_0px_rgba(0,0,0,0.04)] ${className}`}
+      className={`w-full relative px-9 border-[0.75px] border-gray-300 border-t-0 shadow-[0px_7px_25px_0px_rgba(0,0,0,0.04)] ${className}`}
     >
       <div
         className="
@@ -133,7 +141,7 @@ export function CardWaiting({ children }: { children: React.ReactNode }) {
   const gap = Math.max(0, perimeter - segment);
 
   return (
-    <div className="relative max-w-[450px] border-[0.75px] border-gray-300 shadow-[0px_7px_25px_0px_rgba(0,0,0,0.04)]">
+    <div className="relative w-full border-[0.75px] border-gray-300 shadow-[0px_7px_25px_0px_rgba(0,0,0,0.04)]">
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none z-10"
         preserveAspectRatio="none"
@@ -173,13 +181,7 @@ export function CardWaiting({ children }: { children: React.ReactNode }) {
 }
 
 export function CardComponent() {
-  const content = (
-    <TextDarkGrey>
-      {
-        "죽음은 신나게 놀고 있는데 엄마가 '얘야, 그만 놀고 들어와 밥 먹어라'하고 부르는 소리와 같습니다."
-      }
-    </TextDarkGrey>
-  );
+  const content = <TextDarkGrey>{"뿅!"}</TextDarkGrey>;
 
   const profiles = data.profiles.slice(0, 2);
   const books = data.books.map((book) => ({
@@ -188,10 +190,10 @@ export function CardComponent() {
   }));
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 w-full">
       <CardLeftLine>{content}</CardLeftLine>
       <CardTopLine className="py-8 px-4">{content}</CardTopLine>
-      <CardWaiting>{content}</CardWaiting>
+      <CardWaiting>{"애니메이션 고정 이슈"}</CardWaiting>
       <CardSouline profiles={profiles} />
       <CardMutualBooks books={books} />
     </div>
