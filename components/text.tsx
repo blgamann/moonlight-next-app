@@ -1,21 +1,28 @@
 import { gurmukhiMN } from "@/app/fonts";
 import Link from "next/link";
 
-export function TextLogo({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+export function TextLogo({ className }: { className?: string }) {
   return (
-    <Link href="/discover">
+    <Link href="#">
       <div
         className={`${gurmukhiMN.className} text-[#39d4e7] text-xl ${className}`}
       >
-        {children}
+        moonlight
       </div>
     </Link>
+  );
+}
+
+export function TextLogoSoullink({ className }: { className?: string }) {
+  return (
+    <div className={`flex items-center gap-2.5 ${className}`}>
+      <TextLogo />
+      <div
+        className={`${gurmukhiMN.className} text-sm text-[#929292] tracking-[0.15em] mb-[-4px]`}
+      >
+        SOULLINK
+      </div>
+    </div>
   );
 }
 
@@ -92,7 +99,8 @@ export function TextGrey({
 export function TextComponents() {
   return (
     <div className="flex flex-col gap-4">
-      <TextLogo>moonlight (TextLogo)</TextLogo>
+      <TextLogo />
+      <TextLogoSoullink />
       <TextCyan>초대 기반 (TextCyan)</TextCyan>
       <TextGradient>책을 통해, 마음이 만나는 곳 (TextGradient)</TextGradient>
       <TextBlack>문 라이트에 오신 것을 환영합니다 (TextBlack)</TextBlack>

@@ -1,10 +1,11 @@
 "use client";
 
-import { TextLogo } from "./text";
-import { useIsGardenPage } from "@/hooks/useIsGardenPage";
+import { TextLogo, TextLogoSoullink } from "./text";
+import { useIsGardenPage, useIsSoulLinkPage } from "@/hooks/useIsGardenPage";
 
 export function Header() {
   const isGardenPage = useIsGardenPage();
+  const isSoulLinkPage = useIsSoulLinkPage();
 
   return (
     <div
@@ -12,7 +13,11 @@ export function Header() {
         isGardenPage ? "bg-transparent" : "bg-white"
       }`}
     >
-      <TextLogo className="mt-[-2px] ml-13 cursor-pointer">moonlight</TextLogo>
+      {isSoulLinkPage ? (
+        <TextLogoSoullink className="mt-[-2px] ml-13 cursor-pointer" />
+      ) : (
+        <TextLogo className="mt-[-2px] ml-13 cursor-pointer" />
+      )}
     </div>
   );
 }

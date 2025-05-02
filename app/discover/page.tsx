@@ -5,8 +5,6 @@ import {
   IndexTop,
   ProfileLg,
   ProfileSm,
-  CardLeftLine,
-  TextDarkGrey,
   BookSm,
   TextBlack,
   TextGrey,

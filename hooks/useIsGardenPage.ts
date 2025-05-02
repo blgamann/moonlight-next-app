@@ -8,3 +8,8 @@ export function useIsGardenPage(): boolean {
     pathname.startsWith("/garden/") && !pathname.startsWith("/garden/book/")
   );
 }
+
+export function useIsSoulLinkPage(): boolean {
+  const pathname = usePathname();
+  return pathname.startsWith("/soullink");
+}

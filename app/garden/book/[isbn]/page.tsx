@@ -13,6 +13,7 @@ export default async function BookPage({
   params: Promise<{ isbn: string }>;
 }) {
   const { isbn } = await params;
+  console.log(isbn);
   const book = data.books[0];
   const questions = data.book_questions;
   const events = data.events;

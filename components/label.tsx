@@ -1,4 +1,4 @@
-import { TextGrey } from "./text";
+import { TextBlack, TextGrey } from "./text";
 
 export function Label({ children }: { children: React.ReactNode }) {
   return (
@@ -8,10 +8,19 @@ export function Label({ children }: { children: React.ReactNode }) {
   );
 }
 
+export function LabelLg({ children }: { children: React.ReactNode }) {
+  return (
+    <TextBlack className="w-full text-xl font-semibold pb-5 border-b-[0.75px] border-gray-300">
+      {children}
+    </TextBlack>
+  );
+}
+
 export function LabelComponents() {
   return (
     <div className="flex flex-col gap-4 w-full max-w-[900px]">
       <Label>함께 읽은 책</Label>
+      <LabelLg>소울링크</LabelLg>
     </div>
   );
 }

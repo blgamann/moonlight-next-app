@@ -1,7 +1,5 @@
-import { BookLg, BookXl, Button, TextGrey } from "@/components";
+import { BookXl, Button, TextGrey } from "@/components";
 import Image from "next/image";
-
-import data from "@/data.json";
 
 export default async function GardenLandingPage({
   params,
@@ -26,9 +24,6 @@ export default async function GardenLandingPage({
     imageUrl =
       "https://shopping-phinf.pstatic.net/main_3244103/32441031268.20230404163921.jpg?type=w300";
   }
-
-  // dummy data
-  const book = data.books[0];
 
   return (
     <div className="relative w-full h-screen overflow-hidden">

@@ -75,8 +75,10 @@ export function ProfileMdSoulmate({ image, name, className }: ProfileProps) {
         </div>
       </div>
       {name && (
-        <div className="mt-2">
-          <TextBlack className="text-base font-semibold">{name}</TextBlack>
+        <div className="mt-2 w-[100px] text-center">
+          <TextDarkGrey className="text-sm font-normal line-clamp-1">
+            {name}
+          </TextDarkGrey>
         </div>
       )}
     </div>
