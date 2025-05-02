@@ -12,25 +12,24 @@ export function Tabs({ tabs }: { tabs: TabItem[] }) {
   const [active, setActive] = useState(tabs[0].value);
 
   return (
-    <div className="w-full p-6">
-      {/* 전체 탭 바의 기본 밑줄 */}
-      <div className="flex justify-center border-b-[0.75px] border-black/15 mb-6">
+    <div className="w-full p-6 sm:px-14">
+      <div className="flex justify-center border-b-[0.75px] border-black/15">
         {tabs.map((tab) => (
           <button
             key={tab.value}
             onClick={() => setActive(tab.value)}
             className={`
-              relative                       /* 하위 span 위치를 위해 */
-              py-2 px-14 text-base font-medium transition-colors
+              relative
+              w-full
+              py-2 pb-4 px-6 text-sm font-medium transition-colors
               ${
                 active === tab.value
-                  ? "text-black/95" /* 활성 탭 텍스트 컬러 */
+                  ? "text-black/95"
                   : "text-black/50 hover:text-black/95"
               }
             `}
           >
             {tab.label}
-            {/* 활성 탭일 때만 그라디언트 언더라인 */}
             {active === tab.value && (
               <span
                 className="
@@ -45,8 +44,6 @@ export function Tabs({ tabs }: { tabs: TabItem[] }) {
           </button>
         ))}
       </div>
-
-      {/* 탭 콘텐츠 */}
       <div>
         {tabs.map((tab) =>
           tab.value === active ? <div key={tab.value}>{tab.content}</div> : null

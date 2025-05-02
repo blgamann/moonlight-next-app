@@ -53,7 +53,11 @@ export function BookLg({ image, title }: BookProps) {
   );
 }
 
-export function BookXl({ image, title, className }: BookProps) {
+export function BookXl({
+  image,
+  title,
+  className,
+}: BookProps & { className?: string }) {
   return (
     <div className={`flex items-center justify-center ${className}`}>
       <Image

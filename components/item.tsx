@@ -81,7 +81,7 @@ export function ItemQuestion({
   soullinks: number;
 }) {
   return (
-    <div className="flex">
+    <div className="flex items-center">
       <div className="flex flex-col gap-4">
         <ItemText main={question} />
         <div className="flex">
