@@ -1,9 +1,22 @@
 import { BookItem } from "@/lib/book";
-import { BookLg, TextBlack, TextDarkGrey, TextGrey } from "@/components";
+import {
+  BookLg,
+  BookMd,
+  CardLeftLine,
+  ProfileMd,
+  TextBlack,
+  TextDarkGrey,
+  TextGrey,
+} from "@/components";
 import { Garden } from "@/lib/garden";
 import Link from "next/link";
+import { GoInfinity, GoComment } from "react-icons/go";
 
-export function BookSearchItem({
+import data from "@/data.json";
+
+// TODO: tabs -> list item components
+
+export function ItemBookSearch({
   book,
   garden,
 }: {
@@ -23,14 +36,14 @@ export function BookSearchItem({
   };
 
   return (
-    <div className="flex py-8 border-t-[0.75px] border-gray-300">
+    <div className="flex">
       <Link
         href={`/garden/book/${book.isbn}`}
         key={book.isbn}
         className="block"
       >
         <div className="group cursor-pointer flex">
-          <BookLg title={book.title} url={book.image} />
+          <BookLg title={book.title} image={book.image} />
           <div className="flex flex-col ml-6 justify-between">
             <div className="flex flex-col gap-1 mt-1">
               <TextBlack className="text-lg font-semibold group-hover:underline">
@@ -58,4 +71,190 @@ export function BookSearchItem({
   );
 }
 
-// TODO: tabs -> list item components
+export function ItemQuestion({
+  question,
+  answers,
+  soullinks,
+}: {
+  question: string;
+  answers: number;
+  soullinks: number;
+}) {
+  return (
+    <div className="flex">
+      <div className="flex flex-col gap-4">
+        <ItemText main={question} />
+        <div className="flex">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1">
+              <GoComment className="text-gray-500" />
+              <TextGrey className="text-sm">{answers}</TextGrey>
+            </div>
+            <div className="flex items-center gap-1">
+              <GoInfinity className="text-gray-500" />
+              <TextGrey className="text-sm">{soullinks}</TextGrey>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function ItemText({ main, sub }: { main: string; sub?: string }) {
+  return (
+    <div className="flex-1 flex flex-col justify-center gap-3">
+      <TextBlack className="text-lg font-semibold">{main}</TextBlack>
+      {sub && <TextGrey className="text-base line-clamp-2">{sub}</TextGrey>}
+    </div>
+  );
+}
+
+export function ItemEvent({
+  title,
+  date,
+  location,
+  participants,
+}: {
+  title: string;
+  date: string;
+  location: string;
+  participants: number;
+}) {
+  return (
+    <ItemText main={title} sub={`${date} · ${location} · ${participants}명`} />
+  );
+}
+export function ItemAnswerProfile({
+  title,
+  answer,
+  name,
+  image,
+}: {
+  title: string;
+  answer: string;
+  name: string;
+  image: string;
+}) {
+  return (
+    <CardLeftLine>
+      <div className="flex">
+        <div className="w-[68px] flex justify-center items-center mr-4">
+          <ProfileMd image={image} name={name} />
+        </div>
+        <ItemText main={title} sub={answer} />
+      </div>
+    </CardLeftLine>
+  );
+}
+
+export function ItemAnswerBook({
+  image,
+  bookTitle,
+  title,
+  answer,
+}: {
+  image: string;
+  bookTitle: string;
+  title: string;
+  answer: string;
+}) {
+  return (
+    <CardLeftLine>
+      <div className="flex">
+        <div className="w-[68px] flex justify-center items-center mr-4">
+          <BookMd title={bookTitle} image={image} />
+        </div>
+        <ItemText main={title} sub={answer} />
+      </div>
+    </CardLeftLine>
+  );
+}
+
+export function ItemSisterGarden({
+  image,
+  bookTitle,
+  title,
+}: {
+  image: string;
+  bookTitle: string;
+  title: string;
+}) {
+  return (
+    <div className="flex">
+      <div className="w-[68px] flex justify-center items-center mr-4">
+        <BookMd title={bookTitle} image={image} />
+      </div>
+      <ItemText main={title} sub={bookTitle} />
+    </div>
+  );
+}
+
+export function ItemComponents() {
+  const profile = data.profiles[0];
+  const question = data.book_questions[0];
+  const answer = data.book_answers[0];
+  const book = {
+    image: data.books[0].imageUrl,
+    title: data.books[0].title,
+    link: data.books[0].id,
+    author: data.books[0].author,
+    discount: "",
+    publisher: data.books[0].publisher,
+    pubdate: "",
+    isbn: "",
+    description: "",
+  };
+
+  return (
+    <div className="flex flex-col justify-center gap-24 max-w-[900px]">
+      <div className="flex flex-col gap-6">
+        <h1 className="w-[200px]">ItemBookSearch</h1>
+        <ItemBookSearch book={book} garden={null} />
+      </div>
+      <div className="flex flex-col gap-6">
+        <h1 className="w-[200px]">ItemQuestion</h1>
+        <ItemQuestion
+          question={question.question_text}
+          answers={10}
+          soullinks={5}
+        />
+      </div>
+      <div className="flex flex-col gap-6">
+        <h1 className="w-[200px]">ItemEvent</h1>
+        <ItemEvent
+          title="채식주의자 함께 읽기"
+          date="1월 24일 (토) 오후 7시"
+          location="서울 관악구"
+          participants={50}
+        />
+      </div>
+      <div className="flex flex-col gap-6">
+        <h1 className="w-[200px]">ItemAnswerProfile</h1>
+        <ItemAnswerProfile
+          title={answer.title}
+          answer={answer.answer_text}
+          name={profile.name}
+          image={profile.imageUrl}
+        />
+      </div>
+      <div className="flex flex-col gap-6">
+        <h1 className="w-[200px]">ItemAnswerBook</h1>
+        <ItemAnswerBook
+          image={book.image}
+          bookTitle={book.title}
+          title={answer.title}
+          answer={answer.answer_text}
+        />
+      </div>
+      <div className="flex flex-col gap-6">
+        <h1 className="w-[200px]">ItemSisterGarden</h1>
+        <ItemSisterGarden
+          image={book.image}
+          bookTitle={book.title}
+          title={answer.title}
+        />
+      </div>
+    </div>
+  );
+}

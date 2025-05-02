@@ -4,7 +4,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { TextCyan, TextDarkGrey } from "./text";
 import { Soulline, SoullineProps } from "./soulline";
 import { HiOutlineInformationCircle } from "react-icons/hi2";
-import { BookProps, BookLg } from "./book";
+import { BookProps, BookList } from "./book";
 
 import data from "@/data.json";
 
@@ -17,7 +17,7 @@ export function CardLeftLine({
 }) {
   return (
     <div
-      className={`w-full relative pl-9 pr-6 py-6.5 border-[0.75px] border-gray-300 border-l-0 shadow-[0px_7px_25px_0px_rgba(0,0,0,0.04)] ${className}`}
+      className={`w-full relative pl-1 border-[0.75px] border-gray-300 border-l-0 shadow-[0px_7px_25px_0px_rgba(0,0,0,0.04)] ${className}`}
     >
       <div
         className="
@@ -43,7 +43,7 @@ export function CardTopLine({
 }) {
   return (
     <div
-      className={`w-full relative px-9 border-[0.75px] border-gray-300 border-t-0 shadow-[0px_7px_25px_0px_rgba(0,0,0,0.04)] ${className}`}
+      className={`w-full relative pt-1 border-[0.75px] border-gray-300 border-t-0 shadow-[0px_7px_25px_0px_rgba(0,0,0,0.04)] ${className}`}
     >
       <div
         className="
@@ -60,45 +60,13 @@ export function CardTopLine({
   );
 }
 
-export function CardSouline({ profiles }: { profiles: SoullineProps[] }) {
-  return (
-    <div className="w-full">
-      <CardTopLine className="py-8">
-        <div className="flex flex-col items-center gap-1.5 mb-10">
-          <TextCyan className="text-sm font-medium">초대 기반</TextCyan>
-          <div className="flex items-center gap-1">
-            <TextDarkGrey className="text-xl font-medium">
-              소울라인
-            </TextDarkGrey>
-            <HiOutlineInformationCircle size={16} color="#aeaeae" />
-          </div>
-        </div>
-        <Soulline profiles={profiles} />
-      </CardTopLine>
-    </div>
-  );
-}
-
-export function CardMutualBooks({ books }: { books: BookProps[] }) {
-  return (
-    <div className="w-full">
-      <CardTopLine className="py-10">
-        <div className="flex flex-col items-center gap-1.5 mb-12">
-          <TextDarkGrey className="text-xl font-medium">
-            함께 읽은 책
-          </TextDarkGrey>
-        </div>
-        <div className="flex gap-10">
-          {books.map((book) => (
-            <BookLg key={book.url} url={book.url} title={book.title} />
-          ))}
-        </div>
-      </CardTopLine>
-    </div>
-  );
-}
-
-export function CardWaiting({ children }: { children: React.ReactNode }) {
+export function CardWaiting({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   const strokeWidth = 3.5;
   const rectRef = useRef<SVGRectElement>(null);
 
@@ -168,7 +136,7 @@ export function CardWaiting({ children }: { children: React.ReactNode }) {
           }}
         />
       </svg>
-      <div className="relative z-0 py-6.5 px-6 bg-white">{children}</div>
+      <div className={`relative z-0 bg-white ${className}`}>{children}</div>
       <style jsx global>{`
         @keyframes moveSegment {
           to {
@@ -180,22 +148,102 @@ export function CardWaiting({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function CardComponent() {
+export function CardProfile({ bio }: { bio: string }) {
+  return (
+    <CardLeftLine className="max-w-[450px] py-6 pl-10 pr-8">
+      <TextDarkGrey>{bio}</TextDarkGrey>
+    </CardLeftLine>
+  );
+}
+
+export function CardSouline({
+  profiles,
+  className,
+}: {
+  profiles: SoullineProps[];
+  className?: string;
+}) {
+  return (
+    <div className="w-full">
+      <CardTopLine className={`px-14 pt-10 pb-10 ${className}`}>
+        <div className="flex flex-col items-center gap-1.5 pb-8">
+          <TextCyan className="text-sm font-medium">초대 기반</TextCyan>
+          <div className="flex items-center gap-1">
+            <TextDarkGrey className="text-xl font-medium">
+              소울라인
+            </TextDarkGrey>
+            <HiOutlineInformationCircle size={16} color="#aeaeae" />
+          </div>
+        </div>
+        <Soulline profiles={profiles} />
+      </CardTopLine>
+    </div>
+  );
+}
+
+export function CardMutualBooks({
+  books,
+  className,
+}: {
+  books: BookProps[];
+  className?: string;
+}) {
+  return (
+    <div className="w-full">
+      <CardTopLine className={`px-14 pt-10 pb-10 ${className}`}>
+        <div className="flex flex-col items-center mb-12">
+          <TextDarkGrey className="text-xl font-medium">
+            함께 읽은 책
+          </TextDarkGrey>
+        </div>
+        <div className="flex">
+          <BookList books={books} />
+        </div>
+      </CardTopLine>
+    </div>
+  );
+}
+
+export function CardComponents() {
   const content = <TextDarkGrey>{"뿅!"}</TextDarkGrey>;
 
   const profiles = data.profiles.slice(0, 2);
   const books = data.books.map((book) => ({
-    url: book.imageUrl,
+    image: book.imageUrl,
     title: book.title,
   }));
+  books.sort(() => Math.random() - 0.5);
 
   return (
-    <div className="flex flex-col gap-4 w-full">
-      <CardLeftLine>{content}</CardLeftLine>
-      <CardTopLine className="py-8 px-4">{content}</CardTopLine>
-      <CardWaiting>{"애니메이션 고정 이슈"}</CardWaiting>
-      <CardSouline profiles={profiles} />
-      <CardMutualBooks books={books} />
+    <div className="flex flex-col items-center justify-center gap-24">
+      <div className="flex flex-col gap-6 justify-center items-center">
+        <h1>CardLeftLine</h1>
+        <CardLeftLine>{content}</CardLeftLine>
+      </div>
+      <div className="flex flex-col gap-6 justify-center items-center">
+        <h1>CardTopLine</h1>
+        <CardTopLine>{content}</CardTopLine>
+      </div>
+      <div className="flex flex-col gap-6 justify-center items-center">
+        <h1>CardWaiting</h1>
+        <CardWaiting>{"애니메이션 고정 이슈"}</CardWaiting>
+      </div>
+      <div className="flex flex-col gap-6 justify-center items-center">
+        <h1>CardProfile</h1>
+        <CardProfile
+          bio={
+            "CardProfileCardProfileCardProfileCardProfileCardProfileCardProfileCardProfileCardProfileCardProfileCardProfileCardProfile"
+          }
+        />
+      </div>
+      <div className="flex flex-col gap-6 justify-center items-center">
+        <h1>CardSouline</h1>
+        <CardSouline profiles={profiles} />
+      </div>
+      <div className="flex flex-col gap-6 justify-center items-center">
+        <h1>CardMutualBooks</h1>
+        <CardMutualBooks books={books} />
+      </div>
     </div>
   );
 }

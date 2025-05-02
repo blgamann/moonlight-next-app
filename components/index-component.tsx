@@ -41,13 +41,13 @@ export function IndexBottomButton({
   );
 }
 
-export function IndexComponent() {
+export function IndexComponents() {
   const profile = data.profiles[0];
 
   return (
     <div className="flex flex-col items-center justify-center">
       <IndexTop>
-        <ProfileSm url={profile.imageUrl} name={profile.name} />
+        <ProfileSm image={profile.imageUrl} name={profile.name} />
       </IndexTop>
       <IndexBottomButton
         onBack={() => {

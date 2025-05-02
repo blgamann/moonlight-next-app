@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { InputGarden, TextBlack, TextCyan } from "@/components";
 import { BookItem } from "@/lib/book";
-import { BookSearchItem } from "@/components/item";
+import { ItemBookSearch } from "@/components/item";
 
 export default function GardenClient({
   initialQuery = "",
@@ -41,7 +41,7 @@ export default function GardenClient({
   };
 
   const containerClasses = submitted
-    ? "flex flex-col items-center flex-1 mt-8"
+    ? "flex flex-col items-center flex-1 mt-24"
     : "flex flex-col items-center flex-1 justify-center";
 
   return (
@@ -82,7 +82,12 @@ export default function GardenClient({
             </div>
             <div className="mt-10">
               {results.map((b) => (
-                <BookSearchItem key={b.isbn} book={b} garden={null} />
+                <div
+                  key={b.isbn}
+                  className="py-10 border-t-[0.75px] border-gray-300"
+                >
+                  <ItemBookSearch book={b} garden={null} />
+                </div>
               ))}
             </div>
           </ul>

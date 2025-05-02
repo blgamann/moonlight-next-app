@@ -32,6 +32,7 @@ export function TextGradient({
         bg-[linear-gradient(178.8deg,_#56c1ff,_#6ae8d8)]
         bg-clip-text
         text-transparent
+        break-words
         ${className}
       `}
     >
@@ -47,7 +48,9 @@ export function TextCyan({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <div className={`text-[#39d4e7] ${className}`}>{children}</div>;
+  return (
+    <div className={`text-[#39d4e7] break-words ${className}`}>{children}</div>
+  );
 }
 
 export function TextBlack({
@@ -57,7 +60,9 @@ export function TextBlack({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <div className={`text-[#383838] ${className}`}>{children}</div>;
+  return (
+    <div className={`text-[#383838] break-words ${className}`}>{children}</div>
+  );
 }
 
 export function TextDarkGrey({
@@ -67,7 +72,9 @@ export function TextDarkGrey({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <div className={`text-[#5e5e5e] ${className}`}>{children}</div>;
+  return (
+    <div className={`text-[#5e5e5e] break-words ${className}`}>{children}</div>
+  );
 }
 
 export function TextGrey({
@@ -77,10 +84,12 @@ export function TextGrey({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <div className={`text-[#929292] ${className}`}>{children}</div>;
+  return (
+    <div className={`text-[#929292] break-words ${className}`}>{children}</div>
+  );
 }
 
-export function TextComponent() {
+export function TextComponents() {
   return (
     <div className="flex flex-col gap-4">
       <TextLogo>moonlight (TextLogo)</TextLogo>

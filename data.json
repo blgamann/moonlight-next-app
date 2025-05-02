@@ -1,24 +1,27 @@
 {
   "books": [
     {
-      "id": "book-vegetarian",
-      "title": "채식주의자",
-      "author": "한강",
-      "imageUrl": "/books/book1.jpg",
-      "tags": ["read"]
-    },
-    {
       "id": "book-seonghak",
       "title": "성학십도",
       "author": "퇴계 이황",
       "imageUrl": "/books/book2.jpg",
+      "publisher": "문학동네",
       "tags": ["interest"]
+    },
+    {
+      "id": "book-vegetarian",
+      "title": "채식주의자",
+      "author": "한강",
+      "imageUrl": "/books/book1.jpg",
+      "publisher": "문학동네",
+      "tags": ["read"]
     },
     {
       "id": "book-homo-deus",
       "title": "호모 데우스: 미래의 역사",
       "author": "유발 하라리",
       "imageUrl": "/books/book3.jpg",
+      "publisher": "문학동네",
       "tags": ["read", "interest"]
     }
   ],

@@ -1,17 +1,17 @@
 import Image from "next/image";
 import data from "@/data.json";
-import { TextDarkGrey } from "./text";
+import { TextBlack, TextDarkGrey, TextGrey } from "./text";
 
 export interface BookProps {
-  url: string;
+  image: string;
   title: string;
 }
 
-export function BookSm({ url, title }: BookProps) {
+export function BookSm({ image, title }: BookProps) {
   return (
     <div className="flex items-center justify-center">
       <Image
-        src={url}
+        src={image}
         alt={title}
         width={20}
         height={0}
@@ -23,11 +23,26 @@ export function BookSm({ url, title }: BookProps) {
   );
 }
 
-export function BookLg({ url, title }: BookProps) {
+export function BookMd({ image, title }: BookProps) {
+  return (
+    <div className="flex flex-col items-center">
+      <Image
+        src={image}
+        alt={title}
+        width={59}
+        height={0}
+        style={{ height: "auto" }}
+        className="object-contain"
+      />
+    </div>
+  );
+}
+
+export function BookLg({ image, title }: BookProps) {
   return (
     <div className="flex items-center justify-center">
       <Image
-        src={url}
+        src={image}
         alt={title}
         width={100}
         height={0}
@@ -38,13 +53,104 @@ export function BookLg({ url, title }: BookProps) {
   );
 }
 
-export function BookComponent() {
+export function BookXl({ image, title, className }: BookProps) {
+  return (
+    <div className={`flex items-center justify-center ${className}`}>
+      <Image
+        src={image}
+        alt={title}
+        width={150}
+        height={0}
+        style={{ height: "auto" }}
+        className="object-contain"
+      />
+    </div>
+  );
+}
+
+export function BookList({ books }: { books: BookProps[] }) {
+  return (
+    <div className="flex gap-8">
+      {books.map((book) => (
+        <BookLg key={book.title} image={book.image} title={book.title} />
+      ))}
+    </div>
+  );
+}
+
+export function BookHeader({
+  image,
+  title,
+  author,
+  publisher,
+}: {
+  image: string;
+  title: string;
+  author: string;
+  publisher: string;
+}) {
+  return (
+    <div className="flex items-center justify-center">
+      <Image
+        src={image}
+        alt={title}
+        width={150}
+        height={0}
+        style={{ height: "auto" }}
+        className="object-contain"
+      />
+      <div className="flex flex-col gap-8 ml-10">
+        <div className="flex flex-col gap-4">
+          <TextBlack className="text-3xl font-semibold">{title}</TextBlack>
+          <TextDarkGrey className="text-xl">{author}</TextDarkGrey>
+          <TextGrey className="text-base">{publisher}</TextGrey>
+        </div>
+        <TextDarkGrey className="text-base">
+          {"멤버 327명 · 질문 13개 · 답변 501개 · 소울링크 76쌍"}
+        </TextDarkGrey>
+      </div>
+    </div>
+  );
+}
+
+export function BookComponents() {
   const book = data.books[0];
+  const allBooks = data.books.map((b) => ({
+    image: b.imageUrl,
+    title: b.title,
+  }));
 
   return (
-    <div className="flex flex-col items-center justify-center gap-12">
-      <BookSm url={book.imageUrl} title={book.title} />
-      <BookLg url={book.imageUrl} title={book.title} />
+    <div className="flex flex-col items-center justify-center gap-24 p-10">
+      <div className="flex flex-col gap-6 justify-center items-center">
+        <h1>BookSm</h1>
+        <BookSm image={book.imageUrl} title={book.title} />
+      </div>
+      <div className="flex flex-col gap-6 justify-center items-center">
+        <h1>BookMd</h1>
+        <BookMd image={book.imageUrl} title={book.title} />
+      </div>
+      <div className="flex flex-col gap-6 justify-center items-center">
+        <h1>BookLg</h1>
+        <BookLg image={book.imageUrl} title={book.title} />
+      </div>
+      <div className="flex flex-col gap-6 justify-center items-center">
+        <h1>BookXl</h1>
+        <BookXl image={book.imageUrl} title={book.title} />
+      </div>
+      <div className="flex flex-col gap-6 w-full">
+        <h1 className="text-center">BookList</h1>
+        <BookList books={allBooks} />
+      </div>
+      <div className="flex flex-col gap-6 justify-center items-center">
+        <h1>BookHeader</h1>
+        <BookHeader
+          image={book.imageUrl}
+          title={book.title}
+          author={book.author}
+          publisher={book.publisher}
+        />
+      </div>
     </div>
   );
 }

@@ -14,6 +14,7 @@ import {
   IndexBottomButton,
   CardSouline,
   CardMutualBooks,
+  CardProfile,
 } from "@/components";
 
 export default function DiscoverPage() {
@@ -24,28 +25,26 @@ export default function DiscoverPage() {
 
   const profiles = data.profiles;
   const books = data.books.map((book) => ({
-    url: book.imageUrl,
+    image: book.imageUrl,
     title: book.title,
   }));
 
   return (
     <div className="flex flex-col w-full max-w-[680px] mx-auto px-8 mb-28 mt-26">
       <IndexTop>
-        <ProfileSm url={profile.imageUrl} name={profile.name} />
+        <ProfileSm image={profile.imageUrl} name={profile.name} />
       </IndexTop>
-      <ProfileLg url={profile.imageUrl} name={profile.name} />
+      <ProfileLg image={profile.imageUrl} name={profile.name} />
       <div className="flex justify-center mt-5">
-        <CardLeftLine className="max-w-[450px]">
-          <TextDarkGrey>
-            {
-              "죽음은 신나게 놀고 있는데 엄마가 '얘야, 그만 놀고 들어와 밥 먹어라'하고 부르는 소리와 같습니다."
-            }
-          </TextDarkGrey>
-        </CardLeftLine>
+        <CardProfile
+          bio={
+            "죽음은 신나게 놀고 있는데 엄마가 '얘야, 그만 놀고 들어와 밥 먹어라'하고 부르는 소리와 같습니다."
+          }
+        />
       </div>
       <Breather className="my-18" />
       <div className="flex">
-        <BookSm title={book.title} url={book.imageUrl} />
+        <BookSm title={book.title} image={book.imageUrl} />
       </div>
       <TextBlack className="text-3xl font-semibold mt-4">
         {answer.title}

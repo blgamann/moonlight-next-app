@@ -20,7 +20,7 @@ export function Soulline({ profiles }: { profiles: SoullineProps[] }) {
         {profiles.map((profile, idx) => (
           <React.Fragment key={profile.name}>
             <div className="relative w-18 flex-shrink-0">
-              <ProfileMdSoulline url={profile.imageUrl} />
+              <ProfileMdSoulline image={profile.imageUrl} />
             </div>
             {idx < profiles.length - 1 && (
               <div

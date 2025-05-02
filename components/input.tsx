@@ -105,9 +105,9 @@ export function InputGarden({
   );
 }
 
-export function InputComponent() {
+export function InputComponents() {
   return (
-    <div className="flex flex-col gap-2 w-full">
+    <div className="flex flex-col gap-4 w-full max-w-[900px] mx-auto">
       <Input placeholder="추천인의 ID를 입력해주세요 (Input)" />
       <InputGarden
         value=""

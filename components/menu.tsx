@@ -38,7 +38,7 @@ export const icons = [
     path: "/notification",
   },
   {
-    icon: <ProfileSm url={profile.imageUrl} />,
+    icon: <ProfileSm image={profile.imageUrl} />,
     label: "프로필",
     path: "/profile",
   },

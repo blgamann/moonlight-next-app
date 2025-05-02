@@ -36,7 +36,7 @@ export default async function GardenLandingPage({
 
       {/* 여기부터가 실제 콘텐츠 */}
       <div className="flex items-center justify-center h-full">
-        <BookLg title={book.title} url={book.imageUrl} />
+        <BookLg title={book.title} image={book.imageUrl} />
         <div className="flex flex-col">
           <TextGrey className="text-2xl">{book.title}</TextGrey>
           <TextGrey className="text-4xl mt-6 mb-12 font-bold">

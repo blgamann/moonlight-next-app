@@ -2,22 +2,25 @@
 
 import { useState } from "react";
 import {
-  TextComponent,
-  ProfileComponent,
+  TextComponents,
+  ProfileComponents,
   Breather,
-  BookComponent,
-  IndexComponent,
+  BookComponents,
+  IndexComponents,
   ButtonComponent,
-  CardComponent,
+  CardComponents,
   SoullineComponent,
-  InputComponent,
+  InputComponents,
+  TabsComponent,
+  LabelComponents,
 } from "@/components";
 import { Menu, Menu2, icons } from "@/components/menu";
+import { ItemComponents } from "@/components/item";
 
 const components = [
   {
     label: "book",
-    component: <BookComponent />,
+    component: <BookComponents />,
   },
   {
     label: "breather",
@@ -29,15 +32,23 @@ const components = [
   },
   {
     label: "card",
-    component: <CardComponent />,
+    component: <CardComponents />,
   },
   {
     label: "index",
-    component: <IndexComponent />,
+    component: <IndexComponents />,
   },
   {
     label: "input",
-    component: <InputComponent />,
+    component: <InputComponents />,
+  },
+  {
+    label: "item",
+    component: <ItemComponents />,
+  },
+  {
+    label: "label",
+    component: <LabelComponents />,
   },
   {
     label: "menu",
@@ -49,7 +60,7 @@ const components = [
               key={index}
               icon={icon.icon}
               label={icon.label}
-              onClick={icon.onClick}
+              onClick={() => {}}
             />
           ))}
         </div>
@@ -59,7 +70,7 @@ const components = [
               key={index}
               icon={icon.icon}
               label={icon.label}
-              onClick={icon.onClick}
+              onClick={() => {}}
             />
           ))}
         </div>
@@ -68,27 +79,31 @@ const components = [
   },
   {
     label: "profile",
-    component: <ProfileComponent />,
+    component: <ProfileComponents />,
   },
   {
     label: "soulline",
     component: <SoullineComponent />,
   },
   {
+    label: "tabs",
+    component: <TabsComponent />,
+  },
+  {
     label: "text",
-    component: <TextComponent />,
+    component: <TextComponents />,
   },
 ];
 
 export default function Page() {
-  const [selectedComponent, setSelectedComponent] = useState<string>("card");
+  const [selectedComponent, setSelectedComponent] = useState<string>("");
 
   const selectedComponentData = components.find(
     (component) => component.label === selectedComponent
   );
 
   return (
-    <div className="flex flex-col items-center justify-start pt-10 h-screen w-full mx-auto mt-12">
+    <div className="flex flex-col items-center justify-start pt-10 w-full mx-auto mt-12">
       <div className="flex space-x-4 mb-8 w-full items-center justify-center">
         {components.map((component) => (
           <span
