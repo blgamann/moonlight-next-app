@@ -13,6 +13,7 @@ import {
   InputComponents,
   TabsComponent,
   LabelComponents,
+  IndicatorComponents,
 } from "@/components";
 import { Menu, Menu2, icons } from "@/components/menu";
 import { ItemComponents } from "@/components/item";
@@ -37,6 +38,10 @@ const components = [
   {
     label: "index",
     component: <IndexComponents />,
+  },
+  {
+    label: "indicator",
+    component: <IndicatorComponents />,
   },
   {
     label: "input",
@@ -103,7 +108,7 @@ export default function Page() {
   );
 
   return (
-    <div className="flex flex-col items-center justify-start pt-10 w-full mx-auto mt-12">
+    <div className="flex flex-col items-center justify-start pt-10 w-full mx-auto mt-12 max-w-[900px]">
       <div className="flex space-x-4 mb-8 w-full items-center justify-center">
         {components.map((component) => (
           <span

@@ -2,7 +2,8 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
-import { RiMoonFill } from "react-icons/ri";
+import { RiMoonFill, RiMoonLine } from "react-icons/ri";
+import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
 export function Button({
   children,
@@ -21,10 +22,10 @@ export function Button({
         bg-[#38d4e7]
         hover:bg-[#32bfd0]
         text-white
-        text-base
-        py-4.5
-        px-8
-        rounded-[14px]
+        text-xs
+        py-3
+        px-4
+        rounded-lg
         transition-colors
         font-medium
         ${className}
@@ -35,8 +36,78 @@ export function Button({
   );
 }
 
+export function ButtonCancel({
+  children,
+  onClick,
+  className = "",
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+  className?: string;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        cursor-pointer
+        bg-white
+        hover:bg-gray-100
+        text-[#929292]
+        text-xs
+        py-3
+        px-4
+        border-[0.75px] border-[#929292]
+        rounded-lg
+        transition-colors
+        font-medium
+        ${className}
+      `}
+    >
+      {children}
+    </button>
+  );
+}
+
+export function ButtonBack() {
+  return (
+    <button
+      className="
+        inline-flex items-center justify-center
+        w-10 h-10 rounded-full
+        border-[0.75px] border-black/5
+        bg-white
+        hover:bg-gray-100
+        transition-colors
+        cursor-pointer
+        shadow-md
+      "
+    >
+      <IoChevronBack size={20} className="text-gray-600" />
+    </button>
+  );
+}
+
+export function ButtonForward() {
+  return (
+    <button
+      className="
+        inline-flex items-center justify-center
+        w-10 h-10 rounded-full
+        border-[0.75px] border-black/5
+        bg-white
+        hover:bg-gray-100
+        transition-colors
+        cursor-pointer
+        shadow-md
+      "
+    >
+      <IoChevronForward size={20} className="text-gray-600" />
+    </button>
+  );
+}
+
 export function ButtonDeep() {
-  const scale = 0.7;
+  const scale = 1;
 
   const [active, setActive] = useState(false);
   const [holding, setHolding] = useState(false);
@@ -47,7 +118,7 @@ export function ButtonDeep() {
   const BASE_CONTAINER = 56;
   const BASE_WRAPPER = 48;
   const BASE_ICON = 34;
-  const STROKE = 2;
+  const STROKE = 4;
 
   // Scaled
   const containerSize = BASE_CONTAINER * scale;
@@ -136,7 +207,11 @@ export function ButtonDeep() {
         style={{ width: wrapperSize, height: wrapperSize }}
         animate={controls}
       >
-        <RiMoonFill size={iconSize} color={active ? "#fff" : "#39d4e7"} />
+        {active ? (
+          <RiMoonFill size={iconSize} color="#fff" />
+        ) : (
+          <RiMoonLine size={iconSize} color="#39d4e7" />
+        )}
       </motion.div>
     </div>
   );
@@ -145,7 +220,10 @@ export function ButtonDeep() {
 export function ButtonComponent() {
   return (
     <div className="flex flex-col gap-4">
+      <ButtonBack />
+      <ButtonForward />
       <Button>Button</Button>
+      <ButtonCancel>Button</ButtonCancel>
       <ButtonDeep />
     </div>
   );

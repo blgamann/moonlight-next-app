@@ -10,7 +10,7 @@ export function Label({ children }: { children: React.ReactNode }) {
 
 export function LabelLg({ children }: { children: React.ReactNode }) {
   return (
-    <TextBlack className="w-full text-xl font-semibold pb-5 border-b-[0.75px] border-gray-300">
+    <TextBlack className="w-full text-xl font-semibold pb-4 border-b-[0.75px] border-gray-300">
       {children}
     </TextBlack>
   );

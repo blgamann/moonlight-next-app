@@ -1,15 +1,14 @@
 import { gurmukhiMN } from "@/app/fonts";
-import Link from "next/link";
 
 export function TextLogo({ className }: { className?: string }) {
   return (
-    <Link href="#">
+    <div>
       <div
         className={`${gurmukhiMN.className} text-[#39d4e7] text-xl ${className}`}
       >
         moonlight
       </div>
-    </Link>
+    </div>
   );
 }
 

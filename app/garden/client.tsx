@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { InputGarden, TextBlack, TextCyan } from "@/components";
+import { InputGarden, TextBlack, TextGradient } from "@/components";
 import { BookItem } from "@/lib/book";
 import { ItemBookSearch } from "@/components/item";
 
@@ -75,7 +75,9 @@ export default function GardenClient({
         results.length > 0 && (
           <ul className="mt-20 w-full space-y-4">
             <div className="flex items-center ml-1">
-              <TextCyan className="font-medium text-lg">{submitted}</TextCyan>
+              <TextGradient className="font-medium text-lg">
+                {submitted}
+              </TextGradient>
               <TextBlack className="font-medium text-lg">
                 에 대한 {results.length}개의 검색 결과
               </TextBlack>

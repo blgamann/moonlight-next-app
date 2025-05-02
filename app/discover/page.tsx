@@ -2,17 +2,18 @@
 
 import data from "@/data.json";
 import {
-  IndexTop,
   ProfileLg,
-  ProfileSm,
   BookSm,
   TextBlack,
   TextGrey,
-  Breather,
-  IndexBottomButton,
   CardSouline,
   CardMutualBooks,
   CardProfile,
+  ButtonBack,
+  ButtonForward,
+  IndicatorProfile,
+  IndicatorAnswer,
+  CardAnswer,
 } from "@/components";
 
 export default function DiscoverPage() {
@@ -28,11 +29,15 @@ export default function DiscoverPage() {
   }));
 
   return (
-    <div className="flex flex-col w-full max-w-[680px] mx-auto px-8 mb-28 mt-26">
-      <IndexTop>
-        <ProfileSm image={profile.imageUrl} name={profile.name} />
-      </IndexTop>
-      <ProfileLg image={profile.imageUrl} name={profile.name} />
+    <div className="flex flex-col w-full max-w-[800px] mx-auto px-8 mb-12 mt-26">
+      <div className="flex items-center justify-between mt-5 mx-10">
+        <ButtonBack />
+        <div className="flex flex-col items-center justify-center gap-4">
+          <IndicatorProfile current={1} total={10} />
+          <ProfileLg image={profile.imageUrl} name={profile.name} />
+        </div>
+        <ButtonForward />
+      </div>
       <div className="flex justify-center mt-5">
         <CardProfile
           bio={
@@ -40,23 +45,23 @@ export default function DiscoverPage() {
           }
         />
       </div>
-      <Breather className="my-18" />
-      <div className="flex">
-        <BookSm title={book.title} image={book.imageUrl} />
-      </div>
-      <TextBlack className="text-3xl font-semibold mt-4">
-        {answer.title}
-      </TextBlack>
-      <TextGrey className="text-xl mt-4">{question.question_text}</TextGrey>
-      <TextBlack className="text-base border-t-[0.75px] border-black/15 mt-14 pt-8 whitespace-pre-line">
-        {answer.answer_text}
-      </TextBlack>
-      <Breather className="my-18" />
-      <div className="flex flex-col gap-14">
+      <IndicatorAnswer current={0} total={3} className="mt-20 mb-8" />
+      <CardAnswer>
+        <div className="flex">
+          <BookSm title={book.title} image={book.imageUrl} />
+        </div>
+        <TextBlack className="text-3xl font-semibold mt-4">
+          {answer.title}
+        </TextBlack>
+        <TextGrey className="text-xl mt-4">{question.question_text}</TextGrey>
+        <TextBlack className="text-base border-t-[0.75px] border-black/15 mt-14 pt-8 whitespace-pre-line">
+          {answer.answer_text}
+        </TextBlack>
+      </CardAnswer>
+      <div className="flex flex-col gap-14 mt-18">
         <CardSouline profiles={profiles.slice(0, 2)} />
         <CardMutualBooks books={books} />
       </div>
-      <IndexBottomButton onBack={() => {}} onForward={() => {}} />
     </div>
   );
 }

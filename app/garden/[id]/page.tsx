@@ -40,7 +40,7 @@ export default async function GardenLandingPage({
         />
       </div>
 
-      <div className="absolute bottom-6 left-6 right-6 flex items-end justify-start py-20 px-20 rounded-3xl bg-black/50">
+      <div className="absolute bottom-6 left-6 right-6 flex items-end justify-start py-20 px-20">
         <BookXl title={title} image={imageUrl} />
         <div className="flex flex-col ml-8">
           <TextGrey className="text-2xl text-white/85">{title}</TextGrey>
