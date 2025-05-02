@@ -280,6 +280,93 @@ export function CardSoullinkWaiting({
   );
 }
 
+// New CardNotification component
+type NotificationType = "soullink" | "match" | "letter" | "question";
+
+export interface CardNotificationProps {
+  type: NotificationType;
+  profileImage: string;
+  name?: string; // Used for soullink, match, question
+  bookTitle?: string; // Used for letter
+  author?: string; // Used for letter
+  timestamp: string;
+  isNew?: boolean;
+  className?: string;
+}
+
+export function CardNotification({
+  type,
+  profileImage,
+  name,
+  bookTitle,
+  author,
+  timestamp,
+  isNew = false,
+  className = "",
+}: CardNotificationProps) {
+  const renderContent = () => {
+    switch (type) {
+      case "soullink":
+        return (
+          <div className="flex items-center">
+            <TextBlack>{name}</TextBlack>
+            <TextBlack>님과의&nbsp;</TextBlack>
+            <TextCyan>소울링크</TextCyan>
+            <TextBlack>가 생성되었어요</TextBlack>
+          </div>
+        );
+      case "match":
+        return (
+          <div className="flex items-center">
+            <TextBlack>{name}</TextBlack>
+            <TextBlack>님과의&nbsp;</TextBlack>
+            <TextCyan>매치</TextCyan>
+            <TextBlack>가 생성되었어요</TextBlack>
+          </div>
+        );
+      case "letter":
+        return (
+          <div className="flex flex-col">
+            <TextGrey className="text-sm font-normal mb-0.5">
+              {bookTitle}
+            </TextGrey>
+            <div className="flex items-center">
+              <TextBlack>{author} 작가님의&nbsp;</TextBlack>
+              <TextCyan>편지</TextCyan>
+              <TextBlack>가 도착했어요</TextBlack>
+            </div>
+          </div>
+        );
+      case "question":
+        return (
+          <div className="flex items-center">
+            <TextBlack>{name}</TextBlack>
+            <TextBlack>님과&nbsp;</TextBlack>
+            <TextCyan>공통 관심 질문</TextCyan>
+            <TextBlack>이 생겼어요</TextBlack>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div
+      className={`w-full relative bg-white border-[0.75px] border-gray-200 shadow-[0px_4px_15px_0px_rgba(0,0,0,0.03)] rounded-2xl py-5 px-6 flex items-center justify-between ${className}`}
+    >
+      <div className="flex items-center gap-4">
+        <ProfileMd image={profileImage} />
+        <div className="flex flex-col gap-1 font-medium">
+          {renderContent()}
+          <TextGrey className="text-xs font-normal">{timestamp}</TextGrey>
+        </div>
+      </div>
+      {isNew && <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>}
+    </div>
+  );
+}
+
 export function CardComponents() {
   const content = <TextDarkGrey>{"뿅!"}</TextDarkGrey>;
 
@@ -327,6 +414,36 @@ export function CardComponents() {
       <div className="flex flex-col gap-6 justify-center items-center">
         <h1>CardSoullink</h1>
         <CardSoullink name={profiles[0].name} image={profiles[0].imageUrl} />
+      </div>
+      <div className="flex flex-col gap-6 justify-center items-center w-[500px]">
+        <h1>CardNotification</h1>
+        <CardNotification
+          type="soullink"
+          profileImage={profiles[1].imageUrl}
+          name={profiles[1].name}
+          timestamp="4시간 전"
+          isNew
+        />
+        <CardNotification
+          type="match"
+          profileImage={profiles[0].imageUrl}
+          name={profiles[0].name}
+          timestamp="8시간 전"
+          isNew
+        />
+        <CardNotification
+          type="letter"
+          profileImage={profiles[0].imageUrl} // Replace with actual path if available
+          bookTitle="책임의 생성"
+          author="고쿠분 고이치로"
+          timestamp="12시간 전"
+        />
+        <CardNotification
+          type="question"
+          profileImage={profiles[0].imageUrl} // Replace with actual path if available
+          name="남준"
+          timestamp="6월 7일 (토)"
+        />
       </div>
     </div>
   );
