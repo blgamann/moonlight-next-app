@@ -3,6 +3,8 @@ import {
   BookLg,
   BookMd,
   CardLeftLine,
+  MetaAnswers,
+  MetaSoullinks,
   ProfileMd,
   TextBlack,
   TextDarkGrey,
@@ -10,7 +12,6 @@ import {
 } from "@/components";
 import { Garden } from "@/lib/garden";
 import Link from "next/link";
-import { GoInfinity, GoComment } from "react-icons/go";
 
 import data from "@/data.json";
 
@@ -82,30 +83,28 @@ export function ItemQuestion({
 }) {
   return (
     <div className="flex items-center">
-      <div className="flex flex-col gap-4">
-        <ItemText main={question} />
-        <div className="flex">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-1">
-              <GoComment className="text-gray-500" />
-              <TextGrey className="text-sm">{answers}</TextGrey>
-            </div>
-            <div className="flex items-center gap-1">
-              <GoInfinity className="text-gray-500" />
-              <TextGrey className="text-sm">{soullinks}</TextGrey>
+      <Link href={`/question/1234`} className="block">
+        <div className="group flex flex-col gap-4">
+          <ItemText main={question} />
+          <div className="flex">
+            <div className="flex items-center gap-4">
+              <MetaAnswers count={answers} />
+              <MetaSoullinks count={soullinks} />
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }
 
 export function ItemText({ main, sub }: { main: string; sub?: string }) {
   return (
-    <div className="flex-1 flex flex-col justify-center gap-3">
-      <TextBlack className="text-lg font-semibold">{main}</TextBlack>
-      {sub && <TextGrey className="text-base line-clamp-2">{sub}</TextGrey>}
+    <div className="flex-1 flex flex-col justify-center gap-2.5">
+      <TextBlack className="text-lg font-semibold group-hover:underline">
+        {main}
+      </TextBlack>
+      {sub && <TextGrey className="text-sm line-clamp-2">{sub}</TextGrey>}
     </div>
   );
 }
@@ -122,7 +121,12 @@ export function ItemEvent({
   participants: number;
 }) {
   return (
-    <ItemText main={title} sub={`${date} · ${location} · ${participants}명`} />
+    <Link href={`/garden/book`} className="block group ">
+      <ItemText
+        main={title}
+        sub={`${date} · ${location} · ${participants}명`}
+      />
+    </Link>
   );
 }
 export function ItemAnswerProfile({
@@ -137,14 +141,16 @@ export function ItemAnswerProfile({
   image: string;
 }) {
   return (
-    <CardLeftLine>
-      <div className="flex">
-        <div className="w-[68px] flex justify-center items-center mr-4">
-          <ProfileMd image={image} name={name} />
+    <Link href={`/answer/id`} className="block group">
+      <CardLeftLine className="py-4 px-6.5 cursor-pointer group">
+        <div className="flex">
+          <div className="w-[68px] flex justify-center items-center mr-5.5">
+            <ProfileMd image={image} name={name} />
+          </div>
+          <ItemText main={title} sub={answer} />
         </div>
-        <ItemText main={title} sub={answer} />
-      </div>
-    </CardLeftLine>
+      </CardLeftLine>
+    </Link>
   );
 }
 
@@ -160,14 +166,16 @@ export function ItemAnswerBook({
   answer: string;
 }) {
   return (
-    <CardLeftLine>
-      <div className="flex">
-        <div className="w-[68px] flex justify-center items-center mr-4">
-          <BookMd title={bookTitle} image={image} />
+    <Link href={`/answer/id`} className="block group">
+      <CardLeftLine className="py-5 px-6.5 cursor-pointer group">
+        <div className="flex">
+          <div className="w-[68px] flex justify-center items-center mr-5.5">
+            <BookMd title={bookTitle} image={image} />
+          </div>
+          <ItemText main={title} sub={answer} />
         </div>
-        <ItemText main={title} sub={answer} />
-      </div>
-    </CardLeftLine>
+      </CardLeftLine>
+    </Link>
   );
 }
 
@@ -181,12 +189,14 @@ export function ItemSisterGarden({
   title: string;
 }) {
   return (
-    <div className="flex">
-      <div className="w-[68px] flex justify-center items-center mr-4">
-        <BookMd title={bookTitle} image={image} />
+    <Link href={`/garden/book`} className="group">
+      <div className="flex">
+        <div className="w-[68px] flex justify-center items-center mr-4">
+          <BookMd title={bookTitle} image={image} />
+        </div>
+        <ItemText main={title} sub={bookTitle} />
       </div>
-      <ItemText main={title} sub={bookTitle} />
-    </div>
+    </Link>
   );
 }
 

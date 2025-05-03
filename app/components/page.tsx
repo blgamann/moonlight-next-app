@@ -14,6 +14,7 @@ import {
   TabsComponent,
   LabelComponents,
   IndicatorComponents,
+  MetaComponents,
 } from "@/components";
 import { Menu, Menu2, icons } from "@/components/menu";
 import { ItemComponents } from "@/components/item";
@@ -81,6 +82,10 @@ const components = [
         </div>
       </div>
     ),
+  },
+  {
+    label: "meta",
+    component: <MetaComponents />,
   },
   {
     label: "profile",

@@ -1,6 +1,8 @@
 import data from "@/data.json";
 import Image from "next/image";
 import { TextBlack, TextDarkGrey } from "./text";
+import { ButtonBack } from "./button";
+import { ButtonForward } from "./button";
 
 interface ProfileProps {
   image: string;
@@ -25,10 +27,23 @@ function ProfileImage({ size, image }: { size: number; image: string }) {
   );
 }
 
-export function ProfileSm({ image, name, className }: ProfileProps) {
+export function ProfileXs({ image, name, className }: ProfileProps) {
   return (
     <div className={`flex items-center ${className}`}>
       <ProfileImage size={20} image={image} />
+      {name && (
+        <div className="ml-1">
+          <TextDarkGrey className="text-xs">{name}</TextDarkGrey>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function ProfileSm({ image, name, className }: ProfileProps) {
+  return (
+    <div className={`flex items-center ${className}`}>
+      <ProfileImage size={45} image={image} />
       {name && (
         <div className="ml-1">
           <TextDarkGrey className="text-xs">{name}</TextDarkGrey>
@@ -44,7 +59,7 @@ export function ProfileMd({ image, name, className }: ProfileProps) {
       <ProfileImage size={62} image={image} />
       {name && (
         <div className="mt-1.5">
-          <TextBlack className="text-base font-semibold">{name}</TextBlack>
+          <TextBlack className="text-sm font-medium">{name}</TextBlack>
         </div>
       )}
     </div>
@@ -85,10 +100,26 @@ export function ProfileMdSoulmate({ image, name, className }: ProfileProps) {
   );
 }
 
-export function ProfileLg({ image, name, className }: ProfileProps) {
+export function ProfileLg({
+  image,
+  name,
+  onBack,
+  onForward,
+  className,
+}: {
+  image: string;
+  name: string;
+  onBack?: () => void;
+  onForward?: () => void;
+  className?: string;
+}) {
   return (
-    <div className={`flex flex-col items-center ${className}`}>
-      <ProfileImage size={100} image={image} />
+    <div className={`w-full flex flex-col items-center px-6 ${className}`}>
+      <div className="w-full flex items-center justify-between">
+        {onBack && <ButtonBack />}
+        <ProfileImage size={100} image={image} />
+        {onForward && <ButtonForward />}
+      </div>
       {name && (
         <div className="mt-4">
           <TextBlack className="text-xl font-bold">{name}</TextBlack>
@@ -103,6 +134,11 @@ export function ProfileComponents() {
 
   return (
     <div className="flex flex-col items-center justify-center gap-24">
+      <div className="flex flex-col gap-6 justify-center items-center">
+        <h1>ProfileXs</h1>
+        <ProfileXs image={profile.imageUrl} />
+        <ProfileXs image={profile.imageUrl} name={profile.name} />
+      </div>
       <div className="flex flex-col gap-6 justify-center items-center">
         <h1>ProfileSm</h1>
         <ProfileSm image={profile.imageUrl} />

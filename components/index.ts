@@ -9,6 +9,7 @@ export * from "./input";
 export * from "./item";
 export * from "./label";
 export * from "./menu";
+export * from "./meta";
 export * from "./profile";
 export * from "./soulline";
 export * from "./tabs";

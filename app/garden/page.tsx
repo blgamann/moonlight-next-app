@@ -17,7 +17,7 @@ export default async function GardenPage({
       className="
         flex flex-col
         h-[calc(100vh-3.5rem)]
-        max-w-[700px] mx-auto px-8
+        max-w-[800px] mx-auto px-8
       "
     >
       <GardenClient initialQuery={initialQuery} />

@@ -12,7 +12,7 @@ import { HiOutlineMoon } from "react-icons/hi2";
 import { AiOutlineMenu } from "react-icons/ai";
 
 import data from "@/data.json";
-import { ProfileSm } from "./profile";
+import { ProfileXs } from "./profile";
 
 const profile = data.profiles[0];
 
@@ -38,7 +38,7 @@ export const icons = [
     path: "/notification",
   },
   {
-    icon: <ProfileSm image={profile.imageUrl} />,
+    icon: <ProfileXs image={profile.imageUrl} />,
     label: "프로필",
     path: "/profile",
   },
@@ -139,7 +139,11 @@ export function MenuBar({ onMenuClick }: { onMenuClick: () => void }) {
       >
         <AiOutlineMenu color="#aeaeae" size={18} />
       </div>
-      <div className={`hidden md:flex md:flex-col bg-white`}>
+      <div
+        className={`hidden md:flex md:flex-col ${
+          isGardenPage ? "bg-transparent" : "bg-white"
+        }`}
+      >
         {!isGardenPage &&
           icons.map(({ icon, label, path }, index) => (
             <Menu

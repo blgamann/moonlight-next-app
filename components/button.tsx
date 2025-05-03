@@ -23,7 +23,7 @@ export function Button({
         hover:bg-[#32bfd0]
         text-white
         text-xs
-        py-3
+        py-2.5
         px-4
         rounded-lg
         transition-colors
@@ -106,7 +106,7 @@ export function ButtonForward() {
   );
 }
 
-export function ButtonDeep() {
+export function ButtonDeep({ className }: { className?: string }) {
   const scale = 1;
 
   const [active, setActive] = useState(false);
@@ -157,7 +157,7 @@ export function ButtonDeep() {
 
   return (
     <div
-      className="relative flex items-center justify-center cursor-pointer"
+      className={`relative flex items-center justify-center cursor-pointer ${className}`}
       style={{ width: containerSize, height: containerSize }}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}

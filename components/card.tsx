@@ -17,7 +17,7 @@ import { Button, ButtonBack, ButtonCancel, ButtonDeep } from "./button";
 import { ButtonForward } from "./button";
 import { ProfileMd } from "./profile";
 
-export function CardAnswer({
+export function Card({
   children,
   className,
 }: {
@@ -28,13 +28,27 @@ export function CardAnswer({
     <div
       className={`w-full relative border-[0.75px] border-gray-300 shadow-[0px_7px_25px_0px_rgba(0,0,0,0.04)] rounded-3xl ${className}`}
     >
+      <div>{children}</div>
+    </div>
+  );
+}
+
+export function CardAnswer({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <Card className={className}>
       <div className="pt-14 px-14 pb-6">{children}</div>
       <div className="flex justify-between items-center mb-4 pt-4 px-14 border-t-[0.75px] border-gray-200">
         <ButtonBack />
         <ButtonDeep />
         <ButtonForward />
       </div>
-    </div>
+    </Card>
   );
 }
 
@@ -178,9 +192,15 @@ export function CardWaiting({
   );
 }
 
-export function CardProfile({ bio }: { bio: string }) {
+export function CardProfile({
+  bio,
+  className,
+}: {
+  bio: string;
+  className?: string;
+}) {
   return (
-    <CardLeftLine className="max-w-[450px] py-6 pl-10 pr-8">
+    <CardLeftLine className={`max-w-[450px] py-6 pl-10 pr-8 ${className}`}>
       <TextDarkGrey>{bio}</TextDarkGrey>
     </CardLeftLine>
   );

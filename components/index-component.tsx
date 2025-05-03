@@ -1,7 +1,7 @@
 "use client";
 
 import data from "@/data.json";
-import { ProfileSm } from "./profile";
+import { ProfileXs } from "./profile";
 import { ButtonDeep } from "./button";
 import { IoMdArrowRoundBack, IoMdArrowRoundForward } from "react-icons/io";
 
@@ -47,7 +47,7 @@ export function IndexComponents() {
   return (
     <div className="flex flex-col items-center justify-center">
       <IndexTop>
-        <ProfileSm image={profile.imageUrl} name={profile.name} />
+        <ProfileXs image={profile.imageUrl} name={profile.name} />
       </IndexTop>
       <IndexBottomButton
         onBack={() => {

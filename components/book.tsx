@@ -63,7 +63,7 @@ export function BookXl({
       <Image
         src={image}
         alt={title}
-        width={150}
+        width={140}
         height={0}
         style={{ height: "auto" }}
         className="object-contain"
@@ -86,33 +86,21 @@ export function BookHeader({
   image,
   title,
   author,
-  publisher,
+  className,
 }: {
   image: string;
   title: string;
   author: string;
-  publisher: string;
+  className?: string;
 }) {
   return (
-    <div className="flex items-center justify-center">
-      <Image
-        src={image}
-        alt={title}
-        width={150}
-        height={0}
-        style={{ height: "auto" }}
-        className="object-contain"
-      />
-      <div className="flex flex-col gap-8 ml-10">
-        <div className="flex flex-col gap-4">
-          <TextBlack className="text-3xl font-semibold">{title}</TextBlack>
-          <TextDarkGrey className="text-xl">{author}</TextDarkGrey>
-          <TextGrey className="text-base">{publisher}</TextGrey>
-        </div>
-        <TextDarkGrey className="text-base">
-          {"멤버 327명 · 질문 13개 · 답변 501개 · 소울링크 76쌍"}
-        </TextDarkGrey>
-      </div>
+    <div className={`flex flex-col items-center justify-center ${className}`}>
+      <BookXl image={image} title={title} />
+      <TextBlack className="text-2xl font-semibold mt-4">{title}</TextBlack>
+      <TextGrey className="text-lg mt-2">{author}</TextGrey>
+      <TextDarkGrey className="text-base mt-6">
+        {"멤버 327명 · 질문 13개 · 답변 501개 · 소울링크 76쌍"}
+      </TextDarkGrey>
     </div>
   );
 }
@@ -152,7 +140,6 @@ export function BookComponents() {
           image={book.imageUrl}
           title={book.title}
           author={book.author}
-          publisher={book.publisher}
         />
       </div>
     </div>
