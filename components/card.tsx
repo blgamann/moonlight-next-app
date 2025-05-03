@@ -26,9 +26,9 @@ export function Card({
 }) {
   return (
     <div
-      className={`w-full relative border-[0.75px] border-gray-300 shadow-[0px_7px_25px_0px_rgba(0,0,0,0.04)] rounded-3xl ${className}`}
+      className={`border-[0.75px] border-gray-300 shadow-[0px_7px_25px_0px_rgba(0,0,0,0.04)] rounded-3xl ${className}`}
     >
-      <div>{children}</div>
+      {children}
     </div>
   );
 }

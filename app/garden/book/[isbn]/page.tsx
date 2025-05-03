@@ -6,7 +6,7 @@ import {
   CardLeftLine,
   ItemEvent,
   ItemQuestion,
-  ItemSisterGarden,
+  ItemAnswerBook,
   Tabs,
   TextBlack,
   TextDarkGrey,
@@ -95,7 +95,7 @@ export default async function BookPage({
               key={question.id}
               className="py-10 border-b-[0.75px] border-gray-300 flex px-4"
             >
-              <ItemSisterGarden
+              <ItemAnswerBook
                 image={book.imageUrl}
                 bookTitle={book.title}
                 title={book.title}

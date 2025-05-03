@@ -58,8 +58,8 @@ export function ProfileMd({ image, name, className }: ProfileProps) {
     <div className={`flex flex-col items-center ${className}`}>
       <ProfileImage size={62} image={image} />
       {name && (
-        <div className="mt-1.5">
-          <TextBlack className="text-sm font-medium">{name}</TextBlack>
+        <div className="mt-1.5 w-[100px] text-center line-clamp-1">
+          <TextDarkGrey className="text-sm font-medium">{name}</TextDarkGrey>
         </div>
       )}
     </div>
@@ -73,8 +73,10 @@ export function ProfileMdSoulline({ image, name, className }: ProfileProps) {
         <ProfileImage size={64} image={image} />
       </div>
       {name && (
-        <div className="mt-2">
-          <TextBlack className="text-base font-semibold">{name}</TextBlack>
+        <div className="mt-1.5 w-[100px] text-center line-clamp-1">
+          <TextDarkGrey className="text-base font-semibold">
+            {name}
+          </TextDarkGrey>
         </div>
       )}
     </div>
@@ -100,7 +102,20 @@ export function ProfileMdSoulmate({ image, name, className }: ProfileProps) {
   );
 }
 
-export function ProfileLg({
+export function ProfileLg({ image, name, className }: ProfileProps) {
+  return (
+    <div className={`flex flex-col items-center ${className}`}>
+      <ProfileImage size={85} image={image} />
+      {name && (
+        <div className="mt-2 w-[100px] text-center line-clamp-1">
+          <TextBlack className="text-base font-medium">{name}</TextBlack>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function ProfileXl({
   image,
   name,
   onBack,
@@ -108,17 +123,23 @@ export function ProfileLg({
   className,
 }: {
   image: string;
-  name: string;
+  name?: string;
   onBack?: () => void;
   onForward?: () => void;
   className?: string;
 }) {
   return (
-    <div className={`w-full flex flex-col items-center px-6 ${className}`}>
-      <div className="w-full flex items-center justify-between">
-        {onBack && <ButtonBack />}
+    <div
+      className={`w-full flex flex-col items-center justify-center px-6 ${className}`}
+    >
+      <div
+        className={`w-full flex items-center ${
+          onBack || onForward ? "justify-between" : "justify-center"
+        }`}
+      >
+        {onBack && <ButtonBack onClick={onBack} />}
         <ProfileImage size={100} image={image} />
-        {onForward && <ButtonForward />}
+        {onForward && <ButtonForward onClick={onForward} />}
       </div>
       {name && (
         <div className="mt-4">
@@ -160,9 +181,9 @@ export function ProfileComponents() {
         <ProfileMdSoulmate image={profile.imageUrl} name={profile.name} />
       </div>
       <div className="flex flex-col gap-6 justify-center items-center">
-        <h1>ProfileLg</h1>
-        <ProfileLg image={profile.imageUrl} />
-        <ProfileLg image={profile.imageUrl} name={profile.name} />
+        <h1>ProfileXl</h1>
+        <ProfileXl image={profile.imageUrl} name={profile.name} />
+        <ProfileXl image={profile.imageUrl} name={profile.name} />
       </div>
     </div>
   );

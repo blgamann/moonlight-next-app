@@ -129,7 +129,31 @@ export function ItemEvent({
     </Link>
   );
 }
-export function ItemAnswerProfile({
+
+export function ItemEventLine({
+  title,
+  date,
+  location,
+  participants,
+}: {
+  title: string;
+  date: string;
+  location: string;
+  participants: number;
+}) {
+  return (
+    <CardLeftLine className="py-4 px-6.5 cursor-pointer">
+      <Link href={`/garden/book`} className="block group ">
+        <ItemText
+          main={title}
+          sub={`${date} · ${location} · ${participants}명`}
+        />
+      </Link>
+    </CardLeftLine>
+  );
+}
+
+export function ItemAnswerProfileLine({
   title,
   answer,
   name,
@@ -142,10 +166,35 @@ export function ItemAnswerProfile({
 }) {
   return (
     <Link href={`/answer/id`} className="block group">
-      <CardLeftLine className="py-4 px-6.5 cursor-pointer group">
+      <CardLeftLine className="py-4 px-6.5 cursor-pointer">
         <div className="flex">
           <div className="w-[68px] flex justify-center items-center mr-5.5">
             <ProfileMd image={image} name={name} />
+          </div>
+          <ItemText main={title} sub={answer} />
+        </div>
+      </CardLeftLine>
+    </Link>
+  );
+}
+
+export function ItemAnswerBookLine({
+  image,
+  bookTitle,
+  title,
+  answer,
+}: {
+  image: string;
+  bookTitle: string;
+  title: string;
+  answer: string;
+}) {
+  return (
+    <Link href={`/answer/id`} className="block group">
+      <CardLeftLine className="py-4 px-6.5 cursor-pointer">
+        <div className="flex">
+          <div className="w-[68px] flex justify-center items-center mr-4">
+            <BookMd title={bookTitle} image={image} />
           </div>
           <ItemText main={title} sub={answer} />
         </div>
@@ -163,38 +212,15 @@ export function ItemAnswerBook({
   image: string;
   bookTitle: string;
   title: string;
-  answer: string;
+  answer?: string;
 }) {
   return (
-    <Link href={`/answer/id`} className="block group">
-      <CardLeftLine className="py-5 px-6.5 cursor-pointer group">
-        <div className="flex">
-          <div className="w-[68px] flex justify-center items-center mr-5.5">
-            <BookMd title={bookTitle} image={image} />
-          </div>
-          <ItemText main={title} sub={answer} />
-        </div>
-      </CardLeftLine>
-    </Link>
-  );
-}
-
-export function ItemSisterGarden({
-  image,
-  bookTitle,
-  title,
-}: {
-  image: string;
-  bookTitle: string;
-  title: string;
-}) {
-  return (
-    <Link href={`/garden/book`} className="group">
+    <Link href={`/answer/1234`} className="group">
       <div className="flex">
         <div className="w-[68px] flex justify-center items-center mr-4">
           <BookMd title={bookTitle} image={image} />
         </div>
-        <ItemText main={title} sub={bookTitle} />
+        <ItemText main={title} sub={answer} />
       </div>
     </Link>
   );
@@ -240,12 +266,30 @@ export function ItemComponents() {
         />
       </div>
       <div className="flex flex-col gap-6">
-        <h1 className="w-[200px]">ItemAnswerProfile</h1>
-        <ItemAnswerProfile
+        <h1 className="w-[200px]">ItemEventLine</h1>
+        <ItemEventLine
+          title="채식주의자 함께 읽기"
+          date="1월 24일 (토) 오후 7시"
+          location="서울 관악구"
+          participants={50}
+        />
+      </div>
+      <div className="flex flex-col gap-6">
+        <h1 className="w-[200px]">ItemAnswerProfileLine</h1>
+        <ItemAnswerProfileLine
           title={answer.title}
           answer={answer.answer_text}
           name={profile.name}
           image={profile.imageUrl}
+        />
+      </div>
+      <div className="flex flex-col gap-6">
+        <h1 className="w-[200px]">ItemAnswerBookLine</h1>
+        <ItemAnswerBookLine
+          image={book.image}
+          bookTitle={book.title}
+          title={answer.title}
+          answer={answer.answer_text}
         />
       </div>
       <div className="flex flex-col gap-6">
@@ -258,11 +302,12 @@ export function ItemComponents() {
         />
       </div>
       <div className="flex flex-col gap-6">
-        <h1 className="w-[200px]">ItemSisterGarden</h1>
-        <ItemSisterGarden
+        <h1 className="w-[200px]">ItemBook</h1>
+        <ItemAnswerBook
           image={book.image}
           bookTitle={book.title}
           title={answer.title}
+          answer={answer.answer_text}
         />
       </div>
     </div>

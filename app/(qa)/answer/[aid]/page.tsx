@@ -1,8 +1,10 @@
+"use client";
+
 import {
   BookSm,
   Card,
   CardProfile,
-  ProfileLg,
+  ProfileXl,
   TextGrey,
   TextBlack,
   ButtonDeep,
@@ -34,7 +36,7 @@ export default function AnswerPage() {
     <div className="mt-24 max-w-[800px] mx-auto mb-28">
       <Card className="flex flex-col p-12">
         <div className="flex flex-col items-center justify-center gap-4">
-          <ProfileLg
+          <ProfileXl
             image={profile.imageUrl}
             name={profile.name}
             onBack={onBack}

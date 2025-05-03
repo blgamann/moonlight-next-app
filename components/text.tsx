@@ -25,6 +25,19 @@ export function TextLogoSoullink({ className }: { className?: string }) {
   );
 }
 
+export function TextLogoSoulVault({ className }: { className?: string }) {
+  return (
+    <div className={`flex items-center gap-2.5 ${className}`}>
+      <TextLogo />
+      <div
+        className={`${gurmukhiMN.className} text-sm text-[#929292] tracking-[0.15em] mb-[-4px]`}
+      >
+        SOUL VAULT
+      </div>
+    </div>
+  );
+}
+
 export function TextGradient({
   children,
   className,
@@ -100,6 +113,7 @@ export function TextComponents() {
     <div className="flex flex-col gap-4">
       <TextLogo />
       <TextLogoSoullink />
+      <TextLogoSoulVault />
       <TextCyan>초대 기반 (TextCyan)</TextCyan>
       <TextGradient>책을 통해, 마음이 만나는 곳 (TextGradient)</TextGradient>
       <TextBlack>문 라이트에 오신 것을 환영합니다 (TextBlack)</TextBlack>

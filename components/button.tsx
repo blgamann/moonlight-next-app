@@ -54,7 +54,7 @@ export function ButtonCancel({
         hover:bg-gray-100
         text-[#929292]
         text-xs
-        py-3
+        py-2.5
         px-4
         border-[0.75px] border-[#929292]
         rounded-lg
@@ -68,9 +68,10 @@ export function ButtonCancel({
   );
 }
 
-export function ButtonBack() {
+export function ButtonBack({ onClick }: { onClick?: () => void }) {
   return (
     <button
+      onClick={onClick}
       className="
         inline-flex items-center justify-center
         w-10 h-10 rounded-full
@@ -87,9 +88,10 @@ export function ButtonBack() {
   );
 }
 
-export function ButtonForward() {
+export function ButtonForward({ onClick }: { onClick?: () => void }) {
   return (
     <button
+      onClick={onClick}
       className="
         inline-flex items-center justify-center
         w-10 h-10 rounded-full

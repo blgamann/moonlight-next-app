@@ -5,7 +5,7 @@ import {
   Breather,
   Button,
   ButtonCancel,
-  ItemAnswerProfile,
+  ItemAnswerProfileLine,
   MetaAnswers,
   MetaSoullinks,
   ProfileMd,
@@ -80,7 +80,7 @@ export default function QuestionPage() {
             </Card>
             <div className="mt-12 flex flex-col gap-6">
               {answers.map((answer) => (
-                <ItemAnswerProfile
+                <ItemAnswerProfileLine
                   key={answer.id}
                   title={answer.title}
                   answer={answer.answer_text}

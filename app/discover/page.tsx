@@ -2,7 +2,7 @@
 
 import data from "@/data.json";
 import {
-  ProfileLg,
+  ProfileXl,
   BookSm,
   TextBlack,
   TextGrey,
@@ -38,7 +38,7 @@ export default function DiscoverPage() {
     <div className="flex flex-col w-full max-w-[800px] mx-auto px-8 mb-12 mt-26">
       <div className="flex flex-col items-center justify-center gap-4">
         <IndicatorProfile current={1} total={10} />
-        <ProfileLg
+        <ProfileXl
           image={profile.imageUrl}
           name={profile.name}
           onBack={onBack}
