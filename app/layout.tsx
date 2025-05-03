@@ -19,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${helvetica.className} font-normal bg-white`}>
-        <Header />
+        <div className="fixed top-0 left-13 right-0 z-30">
+          <Header />
+        </div>
         <Menus />
         {children}
         <Toaster />

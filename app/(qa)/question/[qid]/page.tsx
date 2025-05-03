@@ -93,7 +93,7 @@ export default function QuestionPage() {
           <CardTopLine className="mt-18 flex flex-col items-center px-8 pb-8">
             <ProfileSm
               image={profiles[0].imageUrl}
-              className="mt-[-26px] z-10"
+              className="mt-[-26px]"
             />
             <Breather className="my-8" />
             <form onSubmit={handleSubmit} className="w-full space-y-1">

@@ -1,4 +1,4 @@
-import { BookXl, Button, TextGrey } from "@/components";
+import { BookLg, BookXl, Button, TextGrey } from "@/components";
 import Image from "next/image";
 
 export default async function GardenLandingPage({
@@ -40,14 +40,20 @@ export default async function GardenLandingPage({
         />
       </div>
 
-      <div className="absolute bottom-6 left-6 right-6 flex items-end justify-start py-20 px-20">
-        <BookXl title={title} image={imageUrl} />
-        <div className="flex flex-col ml-8">
-          <TextGrey className="text-2xl text-white/85">{title}</TextGrey>
-          <TextGrey className="text-4xl mt-2 mb-14 font-bold text-white/95">
-            {question}
-          </TextGrey>
-          <Button className="w-[160px] mb-2">가든 입장하기</Button>
+      <div className="absolute bottom-6 left-6 right-6 flex items-end justify-start p-12 backdrop-blur-md bg-black/30 rounded-3xl">
+        <div className="flex">
+          <BookLg title={title} image={imageUrl} />
+          <div className="flex flex-col justify-between ml-8 mt-2">
+            <div className="flex flex-col">
+              <TextGrey className="text-lg text-white/85">{title}</TextGrey>
+              <TextGrey className="text-2xl mt-2 font-bold text-white/95 line-clamp-1">
+                {question}
+              </TextGrey>
+            </div>
+            <div>
+              <Button className="w-[160px] mb-2">가든 입장하기</Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

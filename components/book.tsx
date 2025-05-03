@@ -60,13 +60,18 @@ export function BookXl({
 }: BookProps & { className?: string }) {
   return (
     <div className={`flex items-center justify-center ${className}`}>
-      <Image
+      {/* <Image
         src={image}
         alt={title}
         width={140}
         height={0}
         style={{ height: "auto" }}
-        className="object-contain"
+        className="object-cover"
+      /> */}
+      <img
+        src={image}
+        alt={title}
+        className={`w-[140px] h-auto object-cover`}
       />
     </div>
   );

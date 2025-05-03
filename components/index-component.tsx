@@ -7,7 +7,7 @@ import { IoMdArrowRoundBack, IoMdArrowRoundForward } from "react-icons/io";
 
 export function IndexTop({ children }: { children: React.ReactNode }) {
   return (
-    <div className="fixed top-0 right-0 h-14 flex items-center gap-4 p-4 z-50">
+    <div className="fixed top-0 right-0 h-14 flex items-center gap-4 p-4">
       {children}
     </div>
   );
@@ -15,7 +15,7 @@ export function IndexTop({ children }: { children: React.ReactNode }) {
 
 export function IndexBottom({ children }: { children: React.ReactNode }) {
   return (
-    <div className="fixed bottom-0 left-0 w-full h-14 flex items-center gap-4 p-4 z-50 bg-white border-t-[0.75px] border-black/15">
+    <div className="fixed bottom-0 left-0 w-full h-14 flex items-center gap-4 p-4 bg-white border-t-[0.75px] border-black/15">
       {children}
     </div>
   );
@@ -29,7 +29,7 @@ export function IndexBottomButton({
   onForward: () => void;
 }) {
   return (
-    <div className="fixed bottom-0 left-0 w-full h-14 flex items-center justify-between gap-4 z-50 bg-white border-t-[0.75px] border-black/15">
+    <div className="fixed bottom-0 left-0 w-full h-14 flex items-center justify-between gap-4 bg-white border-t-[0.75px] border-black/15">
       <div className="cursor-pointer p-4" onClick={onBack}>
         <IoMdArrowRoundBack size={20} color="#d9d9d9" />
       </div>

@@ -132,7 +132,7 @@ export function MenuBar({ onMenuClick }: { onMenuClick: () => void }) {
   const isGardenPage = useIsGardenPage();
 
   return (
-    <div className="fixed flex pt-2 pl-1 flex-col z-10">
+    <div className="flex pt-2 pl-1 flex-col">
       <div
         className="flex items-center justify-center w-10 h-10 hover:rounded-full cursor-pointer hover:bg-gray-100 ml-1 mb-10"
         onClick={onMenuClick}
@@ -213,7 +213,7 @@ export function Menus() {
       {/* Collapsed */}
       <div
         className={`
-          fixed top-0 left-0 h-full z-10
+          fixed top-0 left-0 h-full z-20
           transform transition-transform duration-300
           ${isOpen ? "-translate-x-full" : "translate-x-0"}
         `}
@@ -225,7 +225,7 @@ export function Menus() {
       <div
         ref={menuRef}
         className={`
-          fixed top-0 left-0 h-full w-50 bg-white shadow-lg z-20
+          fixed top-0 left-0 h-full w-50 bg-white shadow-lg z-30
           transform transition-transform duration-300
           ${isOpen ? "translate-x-0" : "-translate-x-full"}
         `}

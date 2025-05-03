@@ -104,7 +104,7 @@ export default function DiscoverPage() {
     return (
       <div className="flex flex-col w-full max-w-[800px] mx-auto px-8 mb-12">
         {isProfileHeaderFixed && (
-          <div className="fixed top-0 left-0 right-0 z-40 bg-white shadow-sm  border-b border-black/10">
+          <div className="fixed top-0 left-0 right-0 shadow-sm  border-b border-black/10">
             <div className="max-w-[800px] mx-auto px-8 py-2 flex items-center">
               <ProfileSm image={profile.imageUrl} name={profile.name} />
             </div>
@@ -142,8 +142,8 @@ export default function DiscoverPage() {
   return (
     <div className="flex flex-col w-full max-w-[800px] mx-auto px-8 my-14">
       {isProfileHeaderFixed && (
-        <div className="fixed top-0 left-0 right-0 z-40 border-b-[0.75px] border-black/10">
-          <div className="max-w-[760px] mx-auto px-8 flex items-center justify-between bg-white h-14">
+        <div className="fixed top-0 left-0 right-0 border-b-[0.75px] border-black/10 bg-white z-10">
+          <div className="max-w-[760px] mx-auto px-8 flex items-center justify-between h-14">
             <ButtonBack onClick={onBackProfile} />
             <ProfileSm image={profile.imageUrl} name={profile.name} />
             <ButtonForward onClick={onForwardProfile} />
