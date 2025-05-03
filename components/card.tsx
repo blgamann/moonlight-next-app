@@ -15,7 +15,7 @@ import { BookProps, BookList } from "./book";
 import data from "@/data.json";
 import { Button, ButtonBack, ButtonCancel, ButtonDeep } from "./button";
 import { ButtonForward } from "./button";
-import { ProfileMd } from "./profile";
+import { ProfileMd, ProfileXl } from "./profile";
 
 export function Card({
   children,
@@ -193,6 +193,23 @@ export function CardWaiting({
 }
 
 export function CardProfile({
+  children,
+  image,
+  className,
+}: {
+  children: React.ReactNode;
+  image: string;
+  className?: string;
+}) {
+  return (
+    <Card className={`${className}`}>
+      <ProfileXl image={image} className="mt-[-52px]" />
+      {children}
+    </Card>
+  );
+}
+
+export function CardBio({
   bio,
   className,
 }: {
@@ -416,8 +433,8 @@ export function CardComponents() {
         <CardWaiting>{"애니메이션 고정 이슈"}</CardWaiting>
       </div>
       <div className="flex flex-col gap-6 justify-center items-center">
-        <h1>CardProfile</h1>
-        <CardProfile
+        <h1>CardBio</h1>
+        <CardBio
           bio={
             "CardProfileCardProfileCardProfileCardProfileCardProfileCardProfileCardProfileCardProfileCardProfileCardProfileCardProfile"
           }

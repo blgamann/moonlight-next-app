@@ -8,7 +8,7 @@ import {
   TextGrey,
   CardSouline,
   CardMutualBooks,
-  CardProfile,
+  CardBio,
   IndicatorProfile,
   IndicatorAnswer,
   CardAnswer,
@@ -46,7 +46,7 @@ export default function DiscoverPage() {
         />
       </div>
       <div className="flex justify-center">
-        <CardProfile
+        <CardBio
           bio={
             "죽음은 신나게 놀고 있는데 엄마가 '얘야, 그만 놀고 들어와 밥 먹어라'하고 부르는 소리와 같습니다."
           }

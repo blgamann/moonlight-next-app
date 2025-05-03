@@ -3,11 +3,10 @@
 import {
   ButtonDeep,
   BookList,
-  Card,
+  CardBio,
   CardProfile,
   ItemAnswerBook,
   Label,
-  ProfileXl,
   Tabs,
   TextBlack,
   TextDarkGrey,
@@ -80,13 +79,12 @@ export default function ProfilePage() {
 
   return (
     <div className="mt-14 max-w-[800px] mx-auto pt-14 mb-28">
-      <Card className="flex flex-col items-center justify-center">
-        <ProfileXl image={profile.imageUrl} className="mt-[-52px]" />
+      <CardProfile image={profile.imageUrl}>
         <div className="flex flex-col items-center justify-center w-[400px] mx-auto line-clamp-1">
           <TextBlack className="text-2xl font-bold mt-4">
             {profile.name}
           </TextBlack>
-          <CardProfile bio={profile.bio} className="mt-4" />
+          <CardBio bio={profile.bio} className="mt-4" />
         </div>
         <TextDarkGrey className="text-sm mt-4 text-center">
           {"답변 501개 · 소울링크 76쌍"}
@@ -95,7 +93,7 @@ export default function ProfilePage() {
           <ButtonDeep />
         </div>
         <Tabs tabs={tabs} />
-      </Card>
+      </CardProfile>
     </div>
   );
 }
