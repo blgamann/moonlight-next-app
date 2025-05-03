@@ -1,4 +1,4 @@
-import { BookLg, BookXl, Button, TextGrey } from "@/components";
+import { BookLg, Button, TextGrey } from "@/components";
 import Image from "next/image";
 
 export default async function GardenLandingPage({
