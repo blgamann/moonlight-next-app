@@ -33,7 +33,7 @@ export function IndexBottomButton({
       <div className="cursor-pointer p-4" onClick={onBack}>
         <IoMdArrowRoundBack size={20} color="#d9d9d9" />
       </div>
-      <ButtonDeep />
+      <ButtonDeep toastMessage="관심 답변이 등록되었어요!" />
       <div className="cursor-pointer p-4" onClick={onForward}>
         <IoMdArrowRoundForward size={20} color="#d9d9d9" />
       </div>

@@ -62,7 +62,7 @@ export default function AnswerPage() {
           {answer.answer_text}
         </TextBlack>
         <div className="flex justify-center my-18">
-          <ButtonDeep />
+          <ButtonDeep toastMessage="관심 답변이 등록되었어요!" />
         </div>
         <div className="flex flex-col gap-14">
           <CardSouline profiles={profiles.slice(0, 2)} />

@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { RiMoonFill, RiMoonLine } from "react-icons/ri";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
+import { toast } from "react-hot-toast";
 
 export function Button({
   children,
@@ -110,7 +111,13 @@ export function ButtonForward({ onClick }: { onClick?: () => void }) {
   );
 }
 
-export function ButtonDeep({ className }: { className?: string }) {
+export function ButtonDeep({
+  className,
+  toastMessage,
+}: {
+  className?: string;
+  toastMessage: string;
+}) {
   const scale = 1;
 
   const [active, setActive] = useState(false);
@@ -139,8 +146,21 @@ export function ButtonDeep({ className }: { className?: string }) {
     timeoutRef.current = window.setTimeout(() => {
       setActive(true);
       setHolding(false);
+
+      toast.success(toastMessage, {
+        icon: <RiMoonFill className="text-white" size={18} />,
+        style: {
+          background: "linear-gradient(to right, #39d4e7, #36b8e5)",
+          color: "white",
+          padding: "16px",
+          borderRadius: "50px",
+          boxShadow: "0 4px 12px rgba(57, 212, 231, 0.3)",
+        },
+        duration: 3000,
+      });
     }, 2000);
   }
+
   function handlePointerUp() {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -221,14 +241,14 @@ export function ButtonDeep({ className }: { className?: string }) {
   );
 }
 
-export function ButtonComponent() {
+export function ButtonComponents() {
   return (
     <div className="flex flex-col gap-4">
       <ButtonBack />
       <ButtonForward />
       <Button>Button</Button>
       <ButtonCancel>Button</ButtonCancel>
-      <ButtonDeep />
+      <ButtonDeep toastMessage="관심 답변이 등록되었어요!" />
     </div>
   );
 }

@@ -117,7 +117,7 @@ export default async function BookPage({
           className="mt-[-60px]"
         />
         <div className="flex justify-center mt-12 mb-6">
-          <ButtonDeep />
+          <ButtonDeep toastMessage="관심 가든이 등록되었어요!" />
         </div>
         <Tabs tabs={tabs} />
       </Card>

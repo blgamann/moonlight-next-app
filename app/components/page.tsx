@@ -7,7 +7,7 @@ import {
   Breather,
   BookComponents,
   IndexComponents,
-  ButtonComponent,
+  ButtonComponents,
   CardComponents,
   SoullineComponent,
   InputComponents,
@@ -30,7 +30,7 @@ const components = [
   },
   {
     label: "button",
-    component: <ButtonComponent />,
+    component: <ButtonComponents />,
   },
   {
     label: "card",

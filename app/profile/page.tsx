@@ -90,7 +90,7 @@ export default function ProfilePage() {
           {"답변 501개 · 소울링크 76쌍"}
         </TextDarkGrey>
         <div className="flex justify-center mt-12 mb-6">
-          <ButtonDeep />
+          <ButtonDeep toastMessage="관심 프로필이 등록되었어요!" />
         </div>
         <Tabs tabs={tabs} />
       </CardProfile>

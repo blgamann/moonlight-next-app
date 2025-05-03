@@ -49,7 +49,7 @@ export function CardAnswer({
       <div className="pt-14 px-14 pb-6">{children}</div>
       <div className="flex justify-between items-center mb-4 pt-4 px-14 border-t-[0.75px] border-gray-200">
         <ButtonBack onClick={onBack} />
-        <ButtonDeep />
+        <ButtonDeep toastMessage="관심 답변이 등록되었어요!" />
         <ButtonForward onClick={onForward} />
       </div>
     </Card>
