@@ -13,3 +13,8 @@ export function useIsSoulLinkPage(): boolean {
   const pathname = usePathname();
   return pathname.startsWith("/soullink");
 }
+
+export function useIsCollectionPage(): boolean {
+  const pathname = usePathname();
+  return pathname.startsWith("/collection");
+}

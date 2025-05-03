@@ -45,8 +45,8 @@ export function ProfileSm({ image, name, className }: ProfileProps) {
     <div className={`flex items-center ${className}`}>
       <ProfileImage size={45} image={image} />
       {name && (
-        <div className="ml-1">
-          <TextDarkGrey className="text-xs">{name}</TextDarkGrey>
+        <div className="ml-2">
+          <TextDarkGrey className="text-sm">{name}</TextDarkGrey>
         </div>
       )}
     </div>

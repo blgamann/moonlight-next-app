@@ -81,6 +81,7 @@ export function ButtonBack({ onClick }: { onClick?: () => void }) {
         transition-colors
         cursor-pointer
         shadow-md
+        z-10
       "
     >
       <IoChevronBack size={20} className="text-gray-600" />
@@ -101,6 +102,7 @@ export function ButtonForward({ onClick }: { onClick?: () => void }) {
         transition-colors
         cursor-pointer
         shadow-md
+        z-10
       "
     >
       <IoChevronForward size={20} className="text-gray-600" />

@@ -35,18 +35,22 @@ export function Card({
 
 export function CardAnswer({
   children,
+  onBack,
+  onForward,
   className,
 }: {
   children: React.ReactNode;
+  onBack?: () => void;
+  onForward?: () => void;
   className?: string;
 }) {
   return (
     <Card className={className}>
       <div className="pt-14 px-14 pb-6">{children}</div>
       <div className="flex justify-between items-center mb-4 pt-4 px-14 border-t-[0.75px] border-gray-200">
-        <ButtonBack />
+        <ButtonBack onClick={onBack} />
         <ButtonDeep />
-        <ButtonForward />
+        <ButtonForward onClick={onForward} />
       </div>
     </Card>
   );
