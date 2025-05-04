@@ -12,7 +12,7 @@ import { HiOutlineMoon } from "react-icons/hi2";
 import { AiOutlineMenu } from "react-icons/ai";
 
 import data from "@/data.json";
-import { ProfileXs } from "./profile";
+import { Profile } from "./profile";
 
 const profile = data.profiles[0];
 
@@ -38,7 +38,7 @@ export const icons = [
     path: "/notification",
   },
   {
-    icon: <ProfileXs image={profile.imageUrl} />,
+    icon: <Profile size="xs" image={profile.imageUrl} />,
     label: "프로필",
     path: "/profile",
   },

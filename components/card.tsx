@@ -10,12 +10,11 @@ import {
 } from "./text";
 import { Soulline, SoullineProps } from "./soulline";
 import { HiOutlineInformationCircle } from "react-icons/hi2";
-import { BookProps, BookList } from "./book";
 
 import data from "@/data.json";
 import { Button, ButtonBack, ButtonCancel, ButtonDeep } from "./button";
 import { ButtonForward } from "./button";
-import { ProfileMd, ProfileXl } from "./profile";
+import { Profile } from "./profile";
 
 export function Card({
   children,
@@ -198,16 +197,14 @@ export function CardWaiting({
 
 export function CardProfile({
   children,
-  image,
   className,
 }: {
   children: React.ReactNode;
-  image: string;
   className?: string;
 }) {
   return (
     <Card className={`${className}`}>
-      <ProfileXl image={image} className="mt-[-52px]" />
+      {/* Profile 컴포넌트는 CardProfile 외부에서 children으로 전달되어야 함 */}
       {children}
     </Card>
   );
@@ -252,35 +249,35 @@ export function CardSouline({
   );
 }
 
-export function CardMutualBooks({
-  books,
-  className,
-}: {
-  books: BookProps[];
-  className?: string;
-}) {
-  return (
-    <div className="w-full">
-      <CardTopLine className={`px-14 pt-10 pb-10 ${className}`}>
-        <div className="flex flex-col items-center mb-12">
-          <TextDarkGrey className="text-xl font-medium">
-            함께 읽은 책
-          </TextDarkGrey>
-        </div>
-        <div className="flex">
-          <BookList books={books} />
-        </div>
-      </CardTopLine>
-    </div>
-  );
-}
+// export function CardMutualBooks({
+//   books,
+//   className,
+// }: {
+//   books: BookProps[];
+//   className?: string;
+// }) {
+//   return (
+//     <div className="w-full">
+//       <CardTopLine className={`px-14 pt-10 pb-10 ${className}`}>
+//         <div className="flex flex-col items-center mb-12">
+//           <TextDarkGrey className="text-xl font-medium">
+//             함께 읽은 책
+//           </TextDarkGrey>
+//         </div>
+//         <div className="flex">
+//           <BookList books={books} />
+//         </div>
+//       </CardTopLine>
+//     </div>
+//   );
+// }
 
 export function CardSoullink({ name, image }: { name: string; image: string }) {
   return (
     <CardLeftLine className="py-6 px-6">
       <div className="flex items-center justify-between gap-2">
         <div className="flex gap-4">
-          <ProfileMd image={image} />
+          <Profile size="md" image={image} />
           <div className="flex flex-col gap-1 justify-center font-medium">
             <div className="flex items-center justify-center">
               <TextGradient>{name}</TextGradient>
@@ -306,7 +303,7 @@ export function CardSoullinkWaiting({
     <CardLeftLine className="py-6 px-8">
       <div className="flex items-center justify-between gap-2">
         <div className="flex gap-4">
-          <ProfileMd image={image} />
+          <Profile size="md" image={image} />
           <div className="flex flex-col gap-1 justify-center font-medium">
             <div className="flex items-center justify-center">
               <TextGradient>{name}</TextGradient>
@@ -397,7 +394,7 @@ export function CardNotification({
       className={`w-full relative bg-white border-[0.75px] border-gray-200 shadow-[0px_4px_15px_0px_rgba(0,0,0,0.03)] rounded-2xl py-5 px-6 flex items-center justify-between ${className}`}
     >
       <div className="flex items-center gap-4">
-        <ProfileMd image={profileImage} />
+        <Profile size="md" image={profileImage} />
         <div className="flex flex-col gap-1 font-medium">
           {renderContent()}
           <TextGrey className="text-xs font-normal">{timestamp}</TextGrey>
@@ -409,9 +406,12 @@ export function CardNotification({
 }
 
 export function CardComponents() {
-  const content = <TextDarkGrey>{"뿅!"}</TextDarkGrey>;
+  const content = (
+    <TextDarkGrey>
+      {"남을 바로 하기 전에 먼저 스스로를 돌아보고 자기에게 엄격할지어다"}
+    </TextDarkGrey>
+  );
 
-  const profiles = data.profiles.slice(0, 2);
   const books = data.books.map((book) => ({
     image: book.imageUrl,
     title: book.title,
@@ -420,7 +420,8 @@ export function CardComponents() {
 
   return (
     <div className="flex flex-col items-center justify-center gap-24">
-      <div className="flex flex-col gap-6 justify-center items-center">
+      <Card>{content}</Card>
+      {/* <div className="flex flex-col gap-6 justify-center items-center">
         <h1>CardAnswer</h1>
         <CardAnswer>{content}</CardAnswer>
       </div>
@@ -485,7 +486,7 @@ export function CardComponents() {
           name="남준"
           timestamp="6월 7일 (토)"
         />
-      </div>
+      </div> */}
     </div>
   );
 }

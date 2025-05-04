@@ -13,6 +13,7 @@ import {
   CardSouline,
 } from "@/components";
 import data from "@/data.json";
+
 export default function ProfilePage() {
   const books = data.books;
   const profile = data.profiles[0];
@@ -79,7 +80,7 @@ export default function ProfilePage() {
 
   return (
     <div className="mt-14 max-w-[800px] mx-auto pt-14 mb-28">
-      <CardProfile image={profile.imageUrl}>
+      <CardProfile>
         <div className="flex flex-col items-center justify-center w-[400px] mx-auto line-clamp-1">
           <TextBlack className="text-2xl font-bold mt-4">
             {profile.name}

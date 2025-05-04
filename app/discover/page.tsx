@@ -3,7 +3,6 @@
 import data from "@/data.json";
 import { useState, useEffect, useRef } from "react";
 import {
-  ProfileXl,
   BookSm,
   TextBlack,
   TextGrey,
@@ -13,10 +12,10 @@ import {
   IndicatorProfile,
   IndicatorAnswer,
   CardAnswer,
-  ProfileSm,
   ButtonBack,
   ButtonForward,
 } from "@/components";
+import { Profile } from "@/components/profile";
 
 export default function DiscoverPage() {
   const [currentProfileIndex, setCurrentProfileIndex] = useState(0);
@@ -106,7 +105,7 @@ export default function DiscoverPage() {
         {isProfileHeaderFixed && (
           <div className="fixed top-0 left-0 right-0 shadow-sm  border-b border-black/10">
             <div className="max-w-[800px] mx-auto px-8 py-2 flex items-center">
-              <ProfileSm image={profile.imageUrl} name={profile.name} />
+              <Profile size="sm" image={profile.imageUrl} name={profile.name} />
             </div>
           </div>
         )}
@@ -117,12 +116,7 @@ export default function DiscoverPage() {
               current={currentProfileIndex}
               total={data.profiles.length}
             />
-            <ProfileXl
-              image={profile.imageUrl}
-              name={profile.name}
-              onBack={onBackProfile}
-              onForward={onForwardProfile}
-            />
+            <Profile size="xl" image={profile.imageUrl} name={profile.name} />
           </div>
           <div className="flex justify-center w-full">
             <CardBio bio={profile.bio} className="mt-6" />
@@ -145,7 +139,7 @@ export default function DiscoverPage() {
         <div className="fixed top-0 left-0 right-0 border-b-[0.75px] border-black/10 bg-white z-10">
           <div className="max-w-[760px] mx-auto px-8 flex items-center justify-between h-14">
             <ButtonBack onClick={onBackProfile} />
-            <ProfileSm image={profile.imageUrl} name={profile.name} />
+            <Profile size="sm" image={profile.imageUrl} name={profile.name} />
             <ButtonForward onClick={onForwardProfile} />
           </div>
         </div>
@@ -157,12 +151,7 @@ export default function DiscoverPage() {
             current={currentProfileIndex}
             total={data.profiles.length}
           />
-          <ProfileXl
-            image={profile.imageUrl}
-            name={profile.name}
-            onBack={onBackProfile}
-            onForward={onForwardProfile}
-          />
+          <Profile size="xl" image={profile.imageUrl} name={profile.name} />
         </div>
         <div className="flex justify-center w-full">
           <CardBio bio={profile.bio} className="mt-6" />

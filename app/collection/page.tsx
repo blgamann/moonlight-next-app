@@ -3,7 +3,7 @@ import {
   Card,
   ItemAnswerProfileLine,
   ItemEventLine,
-  ProfileLg,
+  Profile,
   Tabs,
 } from "@/components";
 
@@ -54,7 +54,8 @@ export default function CollectionPage() {
       content: (
         <div className="flex flex-wrap justify-center gap-11 mt-8">
           {profiles.map((profile) => (
-            <ProfileLg
+            <Profile
+              size="lg"
               key={profile.id}
               image={profile.imageUrl}
               name={profile.name}

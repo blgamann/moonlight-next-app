@@ -12,6 +12,7 @@ import {
 } from "@/components";
 import { Garden } from "@/lib/garden";
 import Link from "next/link";
+import { Profile } from "./profile";
 
 import data from "@/data.json";
 
@@ -169,7 +170,7 @@ export function ItemAnswerProfileLine({
       <CardLeftLine className="py-4 px-6.5 cursor-pointer">
         <div className="flex">
           <div className="w-[68px] flex justify-center items-center mr-5.5">
-            <ProfileMd image={image} name={name} />
+            <Profile size="md" image={image} name={name} />
           </div>
           <ItemText main={title} sub={answer} />
         </div>

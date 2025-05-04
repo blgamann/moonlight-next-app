@@ -1,147 +1,126 @@
+"use client";
+
 import Image from "next/image";
 import data from "@/data.json";
-import { TextBlack, TextDarkGrey, TextGrey } from "./text";
+import { TextBlack, TextGrey } from "./text";
 
-export interface BookProps {
+// 크기 매핑: cover width (px)
+const SIZE_MAP = {
+  sm: 40,
+  md: 80,
+  lg: 120,
+  xl: 160,
+} as const;
+
+// 텍스트 스타일 매핑
+const TITLE_SIZE_MAP = {
+  sm: "text-sm",
+  md: "text-base",
+  lg: "text-lg",
+  xl: "text-xl",
+} as const;
+const AUTHOR_SIZE_MAP = {
+  sm: "text-xs",
+  md: "text-sm",
+  lg: "text-base",
+  xl: "text-lg",
+} as const;
+const TITLE_WEIGHT_MAP = {
+  sm: "font-medium",
+  md: "font-semibold",
+  lg: "font-semibold",
+  xl: "font-bold",
+} as const;
+const GAP_MAP = {
+  sm: 4,
+  md: 6,
+  lg: 8,
+  xl: 10,
+} as const;
+
+type SizeKey = keyof typeof SIZE_MAP;
+
+interface BookProps {
   image: string;
-  title: string;
+  title?: string;
+  author?: string;
+  size?: SizeKey;
 }
 
-export function BookSm({ image, title }: BookProps) {
-  return (
-    <div className="flex items-center justify-center">
-      <Image
-        src={image}
-        alt={title}
-        width={20}
-        height={0}
-        style={{ height: "auto" }}
-        className="object-contain"
-      />
-      <TextDarkGrey className="text-sm ml-2">{title}</TextDarkGrey>
-    </div>
-  );
-}
-
-export function BookMd({ image, title }: BookProps) {
-  return (
-    <div className="flex flex-col items-center">
-      <Image
-        src={image}
-        alt={title}
-        width={59}
-        height={0}
-        style={{ height: "auto" }}
-        className="object-contain"
-      />
-    </div>
-  );
-}
-
-export function BookLg({ image, title }: BookProps) {
-  return (
-    <div className="flex items-center justify-center">
-      <Image
-        src={image}
-        alt={title}
-        width={100}
-        height={0}
-        style={{ height: "auto" }}
-        className="object-contain"
-      />
-    </div>
-  );
-}
-
-export function BookXl({
-  image,
-  title,
-  className,
-}: BookProps & { className?: string }) {
-  return (
-    <div className={`flex items-center justify-center ${className}`}>
-      <Image
-        src={image}
-        alt={title}
-        width={140}
-        height={0}
-        style={{ height: "auto" }}
-        className="object-cover"
-      />
-    </div>
-  );
-}
-
-export function BookList({ books }: { books: BookProps[] }) {
-  return (
-    <div className="flex gap-8">
-      {books.map((book) => (
-        <BookLg key={book.title} image={book.image} title={book.title} />
-      ))}
-    </div>
-  );
-}
-
-export function BookHeader({
-  image,
-  title,
-  author,
-  className,
-}: {
-  image: string;
-  title: string;
-  author: string;
-  className?: string;
-}) {
-  return (
-    <div className={`flex flex-col items-center justify-center ${className}`}>
-      <BookXl image={image} title={title} />
-      <TextBlack className="text-2xl font-semibold mt-4">{title}</TextBlack>
-      <TextGrey className="text-lg mt-2">{author}</TextGrey>
-      <TextDarkGrey className="text-base mt-6">
-        {"멤버 327명 · 질문 13개 · 답변 501개 · 소울링크 76쌍"}
-      </TextDarkGrey>
-    </div>
-  );
-}
-
-export function BookComponents() {
-  const book = data.books[0];
-  const allBooks = data.books.map((b) => ({
-    image: b.imageUrl,
-    title: b.title,
-  }));
+/**
+ * 범용 Book 컴포넌트
+ * - size: sm, md, lg, xl
+ * - image: 표지 URL
+ * - title: optional 책 제목
+ * - author: optional 저자 이름
+ */
+export function Book({ image, title, author, size = "md" }: BookProps) {
+  const width = SIZE_MAP[size];
+  const gap = GAP_MAP[size];
 
   return (
-    <div className="flex flex-col items-center justify-center gap-24 p-10">
-      <div className="flex flex-col gap-6 justify-center items-center">
-        <h1>BookSm</h1>
-        <BookSm image={book.imageUrl} title={book.title} />
-      </div>
-      <div className="flex flex-col gap-6 justify-center items-center">
-        <h1>BookMd</h1>
-        <BookMd image={book.imageUrl} title={book.title} />
-      </div>
-      <div className="flex flex-col gap-6 justify-center items-center">
-        <h1>BookLg</h1>
-        <BookLg image={book.imageUrl} title={book.title} />
-      </div>
-      <div className="flex flex-col gap-6 justify-center items-center">
-        <h1>BookXl</h1>
-        <BookXl image={book.imageUrl} title={book.title} />
-      </div>
-      <div className="flex flex-col gap-6 w-full">
-        <h1 className="text-center">BookList</h1>
-        <BookList books={allBooks} />
-      </div>
-      <div className="flex flex-col gap-6 justify-center items-center">
-        <h1>BookHeader</h1>
-        <BookHeader
-          image={book.imageUrl}
-          title={book.title}
-          author={book.author}
+    <div className="flex flex-col items-center" style={{ gap }}>
+      <div
+        className="overflow-hidden rounded-sm shadow-sm"
+        style={{ width, height: (width * 1.5).toFixed(0) + "px" }}
+      >
+        <Image
+          src={image}
+          alt={title || "book cover"}
+          width={width}
+          height={Math.round(width * 1.5)}
+          className="object-cover w-full h-full"
         />
       </div>
+      {title && (
+        <TextBlack
+          className={`${TITLE_SIZE_MAP[size]} ${TITLE_WEIGHT_MAP[size]} text-center line-clamp-2`}
+        >
+          {title}
+        </TextBlack>
+      )}
+      {author && (
+        <TextGrey
+          className={`${AUTHOR_SIZE_MAP[size]} text-center line-clamp-1`}
+        >
+          {author}
+        </TextGrey>
+      )}
+    </div>
+  );
+}
+
+/**
+ * 모든 사이즈와 옵션(title/author) 조합 예시를 렌더링
+ */
+export function BookComponents() {
+  const sample = data.books[0];
+  const books = [
+    { title: sample.title },
+    { title: sample.title, author: sample.author },
+  ];
+  const sizes: SizeKey[] = ["sm", "md", "lg", "xl"];
+
+  return (
+    <div className="space-y-12 p-8">
+      {books.map((opts, idx) => (
+        <section key={idx}>
+          <h2 className="text-xl font-bold mb-4">
+            {opts.author ? "Title + Author" : "Title Only"}
+          </h2>
+          <div className="flex items-end gap-10">
+            {sizes.map((size) => (
+              <Book
+                key={`${idx}-${size}`}
+                image={sample.imageUrl}
+                title={opts.title}
+                author={opts.author}
+                size={size}
+              />
+            ))}
+          </div>
+        </section>
+      ))}
     </div>
   );
 }

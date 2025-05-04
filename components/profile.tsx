@@ -1,190 +1,215 @@
-import data from "@/data.json";
+"use client";
+
 import Image from "next/image";
-import { TextBlack, TextDarkGrey } from "./text";
-import { ButtonBack } from "./button";
-import { ButtonForward } from "./button";
+import data from "@/data.json";
+import { TextDarkGrey } from "./text";
+
+// 크기 매핑
+const SIZE_MAP = {
+  xs: 20,
+  sm: 35,
+  md: 62,
+  lg: 85,
+  xl: 100,
+} as const;
+
+// 텍스트 스타일 매핑
+const FONT_SIZE_MAP = {
+  xs: "text-xs",
+  sm: "text-sm",
+  md: "text-base",
+  lg: "text-lg",
+  xl: "text-xl",
+} as const;
+const FONT_WEIGHT_MAP = {
+  xs: "font-normal",
+  sm: "font-medium",
+  md: "font-medium",
+  lg: "font-semibold",
+  xl: "font-bold",
+} as const;
+const MARGIN_VERTICAL_MAP = {
+  xs: "mt-1",
+  sm: "mt-1.5",
+  md: "mt-2",
+  lg: "mt-3",
+  xl: "mt-4",
+} as const;
+const MARGIN_HORIZONTAL_MAP = {
+  xs: "ml-1.5",
+  sm: "ml-2",
+  md: "ml-2.5",
+  lg: "ml-3",
+  xl: "ml-4",
+} as const;
+
+// Soulline/Soulmate 최대 border 굵기
+const MAX_BORDER = 3.5;
+
+type SizeKey = keyof typeof SIZE_MAP;
+type Orientation = "vertical" | "horizontal";
+type Variant = "default" | "soulline" | "soulmate";
 
 interface ProfileProps {
   image: string;
   name?: string;
+  size?: SizeKey;
+  orientation?: Orientation;
+  variant?: Variant;
   className?: string;
 }
 
-function ProfileImage({ size, image }: { size: number; image: string }) {
-  return (
-    <div
-      className="rounded-full overflow-hidden bg-white"
-      style={{ width: size, height: size }}
-    >
-      <Image
-        src={image}
-        alt="profile"
-        width={size}
-        height={size}
-        className="w-full h-full object-cover"
-      />
-    </div>
-  );
-}
-
-export function ProfileXs({ image, name, className }: ProfileProps) {
-  return (
-    <div className={`flex items-center ${className}`}>
-      <ProfileImage size={20} image={image} />
-      {name && (
-        <div className="ml-1">
-          <TextDarkGrey className="text-xs">{name}</TextDarkGrey>
-        </div>
-      )}
-    </div>
-  );
-}
-
-export function ProfileSm({ image, name, className }: ProfileProps) {
-  return (
-    <div className={`flex items-center ${className}`}>
-      <ProfileImage size={35} image={image} />
-      {name && (
-        <div className="ml-2.5">
-          <TextDarkGrey className="text-sm">{name}</TextDarkGrey>
-        </div>
-      )}
-    </div>
-  );
-}
-
-export function ProfileMd({ image, name, className }: ProfileProps) {
-  return (
-    <div className={`flex flex-col items-center ${className}`}>
-      <ProfileImage size={62} image={image} />
-      {name && (
-        <div className="mt-1.5 w-[100px] text-center line-clamp-1">
-          <TextDarkGrey className="text-sm font-medium">{name}</TextDarkGrey>
-        </div>
-      )}
-    </div>
-  );
-}
-
-export function ProfileMdSoulline({ image, name, className }: ProfileProps) {
-  return (
-    <div className={`flex flex-col items-center ${className}`}>
-      <div className="w-[74px] h-[74px] flex items-center justify-center rounded-full bg-white border-[2.5px] border-[#6edfee]">
-        <ProfileImage size={64} image={image} />
-      </div>
-      {name && (
-        <div className="mt-1.5 w-[100px] text-center line-clamp-1">
-          <TextDarkGrey className="text-base font-semibold">
-            {name}
-          </TextDarkGrey>
-        </div>
-      )}
-    </div>
-  );
-}
-
-export function ProfileMdSoulmate({ image, name, className }: ProfileProps) {
-  return (
-    <div className={`flex flex-col items-center ${className}`}>
-      <div className="w-[69px] h-[69px] p-[2.5px] rounded-full bg-gradient-to-r from-[#6ae8d8] to-[#56c1ff]">
-        <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
-          <ProfileImage size={64} image={image} />
-        </div>
-      </div>
-      {name && (
-        <div className="mt-2 w-[100px] text-center">
-          <TextDarkGrey className="text-sm font-normal line-clamp-1">
-            {name}
-          </TextDarkGrey>
-        </div>
-      )}
-    </div>
-  );
-}
-
-export function ProfileLg({ image, name, className }: ProfileProps) {
-  return (
-    <div className={`flex flex-col items-center ${className}`}>
-      <ProfileImage size={85} image={image} />
-      {name && (
-        <div className="mt-2 w-[100px] text-center line-clamp-1">
-          <TextBlack className="text-base font-medium">{name}</TextBlack>
-        </div>
-      )}
-    </div>
-  );
-}
-
-export function ProfileXl({
+/**
+ * 범용 Profile 컴포넌트
+ * - size: xs, sm, md, lg, xl
+ * - orientation: vertical(이름 아래), horizontal(이름 오른쪽)
+ * - variant: default, soulline, soulmate
+ */
+export function Profile({
   image,
   name,
-  onBack,
-  onForward,
+  size = "md",
+  orientation = "vertical",
+  variant = "default",
   className,
-}: {
-  image: string;
-  name?: string;
-  onBack?: () => void;
-  onForward?: () => void;
-  className?: string;
-}) {
-  return (
-    <div
-      className={`w-full flex flex-col items-center justify-center px-6 ${className}`}
-    >
+}: ProfileProps) {
+  const dimension = SIZE_MAP[size];
+  const isHorizontal = orientation === "horizontal";
+
+  // container flex 방향
+  const wrapperClass = [
+    "flex items-center",
+    isHorizontal ? "flex-row" : "flex-col",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  // 텍스트 여백 및 정렬
+  const marginClass = isHorizontal
+    ? MARGIN_HORIZONTAL_MAP[size]
+    : MARGIN_VERTICAL_MAP[size];
+  const textAlignClass = isHorizontal ? "text-left" : "text-center";
+
+  // Soulline/Soulmate border width 계산
+  const borderWidth = (dimension / SIZE_MAP.xl) * MAX_BORDER; // xl 기준 최대
+
+  let avatarNode;
+  if (variant === "soulline") {
+    const padding = 4; // 고정 내부 여백(픽셀)
+    const outerSize = dimension + padding * 2 + borderWidth * 2;
+    avatarNode = (
       <div
-        className={`w-full flex items-center ${
-          onBack || onForward ? "justify-between" : "justify-center"
-        }`}
+        className="rounded-full box-border bg-white border-solid border-[#6edfee] overflow-hidden"
+        style={{
+          width: outerSize,
+          height: outerSize,
+          padding,
+          borderWidth,
+        }}
       >
-        {onBack && <ButtonBack onClick={onBack} />}
-        <ProfileImage size={100} image={image} />
-        {onForward && <ButtonForward onClick={onForward} />}
+        <Image
+          src={image}
+          alt="profile"
+          width={dimension}
+          height={dimension}
+          className="w-full h-full object-cover rounded-full"
+        />
       </div>
+    );
+  } else if (variant === "soulmate") {
+    const padding = borderWidth;
+    const outerSize = dimension + padding * 2;
+    avatarNode = (
+      <div
+        className="rounded-full overflow-hidden bg-gradient-to-r from-[#6ae8d8] to-[#56c1ff] box-border"
+        style={{
+          width: outerSize,
+          height: outerSize,
+          padding,
+        }}
+      >
+        <div className="rounded-full overflow-hidden bg-white w-full h-full">
+          <Image
+            src={image}
+            alt="profile"
+            width={dimension}
+            height={dimension}
+            className="w-full h-full object-cover rounded-full"
+          />
+        </div>
+      </div>
+    );
+  } else {
+    avatarNode = (
+      <div
+        className="rounded-full overflow-hidden w-auto h-auto"
+        style={{ width: dimension, height: dimension }}
+      >
+        <Image
+          src={image}
+          alt="profile"
+          width={dimension}
+          height={dimension}
+          className="w-full h-full object-cover rounded-full"
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className={wrapperClass}>
+      {avatarNode}
       {name && (
-        <div className="mt-4">
-          <TextBlack className="text-xl font-bold">{name}</TextBlack>
+        <div className={`${marginClass} w-auto`}>
+          <TextDarkGrey
+            className={`${FONT_SIZE_MAP[size]} ${FONT_WEIGHT_MAP[size]} ${textAlignClass}`}
+          >
+            {name}
+          </TextDarkGrey>
         </div>
       )}
     </div>
   );
 }
 
+// 가독성을 고려해 2열 그리드로 배치
 export function ProfileComponents() {
   const profile = data.profiles[0];
+  const sizes: SizeKey[] = ["xs", "sm", "md", "lg", "xl"];
+  const variants: Variant[] = ["default", "soulline", "soulmate"];
+  const orientations: Orientation[] = ["vertical", "horizontal"];
 
   return (
-    <div className="flex flex-col items-center justify-center gap-24">
-      <div className="flex flex-col gap-6 justify-center items-center">
-        <h1>ProfileXs</h1>
-        <ProfileXs image={profile.imageUrl} />
-        <ProfileXs image={profile.imageUrl} name={profile.name} />
-      </div>
-      <div className="flex flex-col gap-6 justify-center items-center">
-        <h1>ProfileSm</h1>
-        <ProfileSm image={profile.imageUrl} />
-        <ProfileSm image={profile.imageUrl} name={profile.name} />
-      </div>
-      <div className="flex flex-col gap-6 justify-center items-center">
-        <h1>ProfileMd</h1>
-        <ProfileMd image={profile.imageUrl} />
-        <ProfileMd image={profile.imageUrl} name={profile.name} />
-      </div>
-      <div className="flex flex-col gap-6 justify-center items-center">
-        <h1>ProfileMdSoulline</h1>
-        <ProfileMdSoulline image={profile.imageUrl} />
-        <ProfileMdSoulline image={profile.imageUrl} name={profile.name} />
-      </div>
-      <div className="flex flex-col gap-6 justify-center items-center">
-        <h1>ProfileMdSoulmate</h1>
-        <ProfileMdSoulmate image={profile.imageUrl} />
-        <ProfileMdSoulmate image={profile.imageUrl} name={profile.name} />
-      </div>
-      <div className="flex flex-col gap-6 justify-center items-center">
-        <h1>ProfileXl</h1>
-        <ProfileXl image={profile.imageUrl} name={profile.name} />
-        <ProfileXl image={profile.imageUrl} name={profile.name} />
-      </div>
+    <div className="flex flex-col space-y-12">
+      {variants.map((variant) => (
+        <section key={variant}>
+          <h2 className="text-2xl font-bold mb-6 capitalize">
+            {variant} variant
+          </h2>
+          <div className="grid grid-cols-2 gap-8">
+            {orientations.map((orientation) => (
+              <div key={orientation}>
+                <h3 className="text-lg font-semibold mb-4 capitalize">
+                  {orientation === "horizontal" ? "Name Right" : "Name Below"}
+                </h3>
+                <div className="flex items-center gap-6">
+                  {sizes.map((sizeKey) => (
+                    <Profile
+                      key={`${variant}-${orientation}-${sizeKey}`}
+                      image={profile.imageUrl}
+                      name={profile.name}
+                      size={sizeKey}
+                      variant={variant}
+                      orientation={orientation}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
     </div>
   );
 }

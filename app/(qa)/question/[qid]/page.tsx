@@ -8,7 +8,7 @@ import {
   ItemAnswerProfileLine,
   MetaAnswers,
   MetaSoullinks,
-  ProfileSm,
+  Profile,
   TextBlack,
   TextCyan,
   TextDarkGrey,
@@ -68,7 +68,7 @@ export default function QuestionPage() {
             <Card className="mt-12 py-4 rounded-xl">
               <div className="flex items-center px-4 justify-between">
                 <div className="flex items-center gap-2.5">
-                  <ProfileSm image={profiles[0].imageUrl} />
+                  <Profile size="sm" image={profiles[0].imageUrl} />
                   <TextDarkGrey className="text-base">
                     건우님의 생각을 공유해주세요.
                   </TextDarkGrey>
@@ -91,7 +91,8 @@ export default function QuestionPage() {
         )}
         {isWriting && (
           <CardTopLine className="mt-18 flex flex-col items-center px-8 pb-8">
-            <ProfileSm
+            <Profile
+              size="sm"
               image={profiles[0].imageUrl}
               className="mt-[-26px]"
             />
