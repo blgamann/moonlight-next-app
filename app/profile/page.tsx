@@ -2,7 +2,6 @@
 
 import {
   ButtonDeep,
-  BookList,
   CardBio,
   CardProfile,
   ItemAnswerBook,
@@ -47,23 +46,23 @@ export default function ProfilePage() {
       content: (
         <div className="flex flex-col justify-center">
           <Label className="mt-16 mb-8">함께 읽은 책</Label>
-          <BookList
+          {/* <BookList
             books={books.map((book) => ({
               id: book.id,
               title: book.title,
               image: book.imageUrl,
               author: book.author,
             }))}
-          />
+          /> */}
           <Label className="mt-16 mb-8">진화 및 뇌 과학</Label>
-          <BookList
+          {/* <BookList
             books={books.map((book) => ({
               id: book.id,
               title: book.title,
               image: book.imageUrl,
               author: book.author,
             }))}
-          />
+          /> */}
         </div>
       ),
     },

@@ -2,17 +2,19 @@
 import React from "react";
 import data from "@/data.json";
 import { Profile } from "./profile";
-import { SoullineProps } from "./soulline";
 import { TextGrey, TextBlack, TextDarkGrey } from "./text";
 
 import { IoBookOutline } from "react-icons/io5";
 import { GoInfinity } from "react-icons/go";
 
-interface PopCardProps {
-  profiles: SoullineProps[];
-}
-
-export function PopCardHiddenProfiles({ profiles }: PopCardProps) {
+export function PopCardHiddenProfiles({
+  profiles,
+}: {
+  profiles: {
+    imageUrl: string;
+    name: string;
+  }[];
+}) {
   return (
     <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 z-10 w-max max-w-xs">
       <div
@@ -24,11 +26,11 @@ export function PopCardHiddenProfiles({ profiles }: PopCardProps) {
           {profiles.map((profile, index) => (
             <Profile
               key={index}
-              size="sm"
-              variant="soulline"
-              orientation="horizontal"
               image={profile.imageUrl}
               name={profile.name}
+              size={"xs"}
+              variant="soulline"
+              orientation="horizontal"
             />
           ))}
         </div>

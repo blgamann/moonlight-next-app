@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  BookSm,
+  Book,
   Card,
   CardBio,
   TextGrey,
@@ -15,33 +15,15 @@ import data from "@/data.json";
 export default function AnswerPage() {
   const profile = data.profiles[0];
   const profiles = data.profiles.slice(1, 3);
-  const books = data.books.slice(1, 3).map((book) => ({
-    ...book,
-    image: book.imageUrl,
-  }));
   const book = data.books[0];
   const answer = data.book_answers[0];
   const question = data.book_questions[0];
-
-  const onBack = () => {
-    console.log("onBack");
-  };
-
-  const onForward = () => {
-    console.log("onForward");
-  };
 
   return (
     <div className="mt-24 max-w-[800px] mx-auto mb-28">
       <Card className="flex flex-col p-12">
         <div className="flex flex-col items-center justify-center gap-4">
-          <Profile
-            size="xl"
-            image={profile.imageUrl}
-            name={profile.name}
-            onBack={onBack}
-            onForward={onForward}
-          />
+          <Profile size="xl" image={profile.imageUrl} name={profile.name} />
         </div>
         <div className="flex justify-center">
           <CardBio
@@ -52,7 +34,7 @@ export default function AnswerPage() {
           />
         </div>
         <div className="flex mt-20">
-          <BookSm title={book.title} image={book.imageUrl} />
+          <Book title={book.title} image={book.imageUrl} size="sm" />
         </div>
         <TextBlack className="text-3xl font-semibold mt-4">
           {answer.title}
@@ -66,7 +48,7 @@ export default function AnswerPage() {
         </div>
         <div className="flex flex-col gap-14">
           <CardSouline profiles={profiles.slice(0, 2)} />
-          <CardMutualBooks books={books} />
+          {/* <CardMutualBooks books={books} /> */}
         </div>
       </Card>
     </div>

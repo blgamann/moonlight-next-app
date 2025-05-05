@@ -1,5 +1,4 @@
 import {
-  BookList,
   Card,
   ItemAnswerProfileLine,
   ItemEventLine,
@@ -11,7 +10,6 @@ import data from "@/data.json";
 export default function CollectionPage() {
   const profile = data.profiles[0];
   const answers = data.book_answers;
-  const books = data.books;
   const profiles = data.profiles;
   const events = data.events;
 
@@ -38,13 +36,13 @@ export default function CollectionPage() {
       value: "garden",
       content: (
         <div className="mt-8">
-          <BookList
+          {/* <BookList
             books={books.map((book) => ({
               image: book.imageUrl,
               title: book.title,
               author: book.author,
             }))}
-          />
+          /> */}
         </div>
       ),
     },

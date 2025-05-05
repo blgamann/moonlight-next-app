@@ -1,5 +1,4 @@
 import {
-  BookHeader,
   Button,
   ButtonDeep,
   Card,
@@ -110,12 +109,12 @@ export default async function BookPage({
   return (
     <div className="w-full bg-white">
       <Card className="flex flex-col mt-36 max-w-[800px] mx-auto bg-white gap-12 mb-28">
-        <BookHeader
+        {/* <BookHeader
           image={book.imageUrl}
           title={book.title}
           author={book.author}
           className="mt-[-60px]"
-        />
+        /> */}
         <div className="flex justify-center mt-12 mb-6">
           <ButtonDeep toastMessage="관심 가든이 등록되었어요!" />
         </div>

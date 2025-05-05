@@ -1,11 +1,9 @@
 import { BookItem } from "@/lib/book";
 import {
-  BookLg,
-  BookMd,
+  Book,
   CardLeftLine,
   MetaAnswers,
   MetaSoullinks,
-  ProfileMd,
   TextBlack,
   TextDarkGrey,
   TextGrey,
@@ -45,7 +43,7 @@ export function ItemBookSearch({
         className="block"
       >
         <div className="group cursor-pointer flex">
-          <BookLg title={book.title} image={book.image} />
+          <Book title={book.title} image={book.image} size="lg" />
           <div className="flex flex-col ml-6 justify-between">
             <div className="flex flex-col gap-1 mt-1">
               <TextBlack className="text-lg font-semibold group-hover:underline">
@@ -195,7 +193,7 @@ export function ItemAnswerBookLine({
       <CardLeftLine className="py-4 px-6.5 cursor-pointer">
         <div className="flex">
           <div className="w-[68px] flex justify-center items-center mr-4">
-            <BookMd title={bookTitle} image={image} />
+            <Book title={bookTitle} image={image} size="md" />
           </div>
           <ItemText main={title} sub={answer} />
         </div>
@@ -219,7 +217,7 @@ export function ItemAnswerBook({
     <Link href={`/answer/1234`} className="group">
       <div className="flex">
         <div className="w-[68px] flex justify-center items-center mr-4">
-          <BookMd title={bookTitle} image={image} />
+          <Book title={bookTitle} image={image} size="md" />
         </div>
         <ItemText main={title} sub={answer} />
       </div>

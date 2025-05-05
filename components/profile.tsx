@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import data from "@/data.json";
-import { TextDarkGrey } from "./text";
+import { TextDarkGrey, TextGrey } from "./text";
 
 // 크기 매핑
-const SIZE_MAP = {
+export const SIZE_MAP = {
   xs: 20,
   sm: 35,
   md: 62,
@@ -14,28 +14,28 @@ const SIZE_MAP = {
 } as const;
 
 // 텍스트 스타일 매핑
-const FONT_SIZE_MAP = {
+export const FONT_SIZE_MAP = {
   xs: "text-xs",
   sm: "text-sm",
   md: "text-base",
   lg: "text-lg",
   xl: "text-xl",
 } as const;
-const FONT_WEIGHT_MAP = {
+export const FONT_WEIGHT_MAP = {
   xs: "font-normal",
   sm: "font-medium",
   md: "font-medium",
   lg: "font-semibold",
   xl: "font-bold",
 } as const;
-const MARGIN_VERTICAL_MAP = {
+export const MARGIN_VERTICAL_MAP = {
   xs: "mt-1",
   sm: "mt-1.5",
   md: "mt-2",
   lg: "mt-3",
   xl: "mt-4",
 } as const;
-const MARGIN_HORIZONTAL_MAP = {
+export const MARGIN_HORIZONTAL_MAP = {
   xs: "ml-1.5",
   sm: "ml-2",
   md: "ml-2.5",
@@ -44,15 +44,16 @@ const MARGIN_HORIZONTAL_MAP = {
 } as const;
 
 // Soulline/Soulmate 최대 border 굵기
-const MAX_BORDER = 3.5;
+export const MAX_BORDER = 3.5;
 
-type SizeKey = keyof typeof SIZE_MAP;
-type Orientation = "vertical" | "horizontal";
-type Variant = "default" | "soulline" | "soulmate";
+export type SizeKey = keyof typeof SIZE_MAP;
+export type Orientation = "vertical" | "horizontal";
+export type Variant = "default" | "soulline" | "soulmate";
 
 interface ProfileProps {
   image: string;
   name?: string;
+  bio?: string;
   size?: SizeKey;
   orientation?: Orientation;
   variant?: Variant;
@@ -62,12 +63,13 @@ interface ProfileProps {
 /**
  * 범용 Profile 컴포넌트
  * - size: xs, sm, md, lg, xl
- * - orientation: vertical(이름 아래), horizontal(이름 오른쪽)
+ * - orientation: vertical(이름·bio 아래), horizontal(이름·bio 오른쪽)
  * - variant: default, soulline, soulmate
  */
 export function Profile({
   image,
   name,
+  bio,
   size = "md",
   orientation = "vertical",
   variant = "default",
@@ -92,21 +94,17 @@ export function Profile({
   const textAlignClass = isHorizontal ? "text-left" : "text-center";
 
   // Soulline/Soulmate border width 계산
-  const borderWidth = (dimension / SIZE_MAP.xl) * MAX_BORDER; // xl 기준 최대
+  const borderWidth = (dimension / SIZE_MAP.xl) * MAX_BORDER;
 
+  // Avatar 렌더링
   let avatarNode;
   if (variant === "soulline") {
-    const padding = 4; // 고정 내부 여백(픽셀)
+    const padding = 4;
     const outerSize = dimension + padding * 2 + borderWidth * 2;
     avatarNode = (
       <div
         className="rounded-full box-border bg-white border-solid border-[#6edfee] overflow-hidden"
-        style={{
-          width: outerSize,
-          height: outerSize,
-          padding,
-          borderWidth,
-        }}
+        style={{ width: outerSize, height: outerSize, padding, borderWidth }}
       >
         <Image
           src={image}
@@ -123,11 +121,7 @@ export function Profile({
     avatarNode = (
       <div
         className="rounded-full overflow-hidden bg-gradient-to-r from-[#6ae8d8] to-[#56c1ff] box-border"
-        style={{
-          width: outerSize,
-          height: outerSize,
-          padding,
-        }}
+        style={{ width: outerSize, height: outerSize, padding }}
       >
         <div className="rounded-full overflow-hidden bg-white w-full h-full">
           <Image
@@ -143,7 +137,7 @@ export function Profile({
   } else {
     avatarNode = (
       <div
-        className="rounded-full overflow-hidden w-auto h-auto"
+        className="rounded-full overflow-hidden"
         style={{ width: dimension, height: dimension }}
       >
         <Image
@@ -160,15 +154,18 @@ export function Profile({
   return (
     <div className={wrapperClass}>
       {avatarNode}
-      {name && (
-        <div className={`${marginClass} w-auto`}>
+      <div className={`${marginClass} flex flex-col ${textAlignClass}`}>
+        {name && (
           <TextDarkGrey
-            className={`${FONT_SIZE_MAP[size]} ${FONT_WEIGHT_MAP[size]} ${textAlignClass}`}
+            className={`${FONT_SIZE_MAP[size]} ${FONT_WEIGHT_MAP[size]}`}
           >
             {name}
           </TextDarkGrey>
-        </div>
-      )}
+        )}
+        {bio && (
+          <TextGrey className={`${FONT_SIZE_MAP[size]} mt-1`}>{bio}</TextGrey>
+        )}
+      </div>
     </div>
   );
 }
@@ -187,11 +184,13 @@ export function ProfileComponents() {
           <h2 className="text-2xl font-bold mb-6 capitalize">
             {variant} variant
           </h2>
-          <div className="grid grid-cols-2 gap-8">
+          <div className="flex flex-col gap-6">
             {orientations.map((orientation) => (
               <div key={orientation}>
                 <h3 className="text-lg font-semibold mb-4 capitalize">
-                  {orientation === "horizontal" ? "Name Right" : "Name Below"}
+                  {orientation === "horizontal"
+                    ? "Name & Bio Right"
+                    : "Name & Bio Below"}
                 </h3>
                 <div className="flex items-center gap-6">
                   {sizes.map((sizeKey) => (
@@ -199,6 +198,7 @@ export function ProfileComponents() {
                       key={`${variant}-${orientation}-${sizeKey}`}
                       image={profile.imageUrl}
                       name={profile.name}
+                      bio={profile.bio}
                       size={sizeKey}
                       variant={variant}
                       orientation={orientation}

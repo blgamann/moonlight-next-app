@@ -241,12 +241,27 @@ export function ButtonDeep({
 
 export function ButtonComponents() {
   return (
-    <div className="flex flex-col gap-4">
-      <ButtonBack />
-      <ButtonForward />
-      <Button>Button</Button>
-      <ButtonCancel>Button</ButtonCancel>
-      <ButtonDeep toastMessage="관심 답변이 등록되었어요!" />
+    <div className="flex flex-col gap-6">
+      <div>
+        <h1>ButtonBack</h1>
+        <ButtonBack />
+      </div>
+      <div>
+        <h1>ButtonForward</h1>
+        <ButtonForward />
+      </div>
+      <div>
+        <h1>Button</h1>
+        <Button>Button</Button>
+      </div>
+      <div>
+        <h1>ButtonCancel</h1>
+        <ButtonCancel>Button</ButtonCancel>
+      </div>
+      <div>
+        <h1>ButtonDeep</h1>
+        <ButtonDeep toastMessage="관심 답변이 등록되었어요!" />
+      </div>
     </div>
   );
 }
