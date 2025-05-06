@@ -1,4 +1,4 @@
-import { BookLg, Button, TextGrey } from "@/components";
+import { Book, Button, TextGrey } from "@/components";
 import Image from "next/image";
 
 export default async function GardenLandingPage({
@@ -42,7 +42,7 @@ export default async function GardenLandingPage({
 
       <div className="absolute bottom-6 left-6 right-6 flex items-end justify-start p-12 backdrop-blur-md bg-black/30 rounded-3xl">
         <div className="flex">
-          <BookLg title={title} image={imageUrl} />
+          <Book title={title} image={imageUrl} size="lg" />
           <div className="flex flex-col justify-between ml-8 mt-2">
             <div className="flex flex-col">
               <TextGrey className="text-lg text-white/85">{title}</TextGrey>

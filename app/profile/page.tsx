@@ -2,7 +2,6 @@
 
 import {
   ButtonDeep,
-  BookList,
   CardBio,
   CardProfile,
   ItemAnswerBook,
@@ -13,6 +12,7 @@ import {
   CardSouline,
 } from "@/components";
 import data from "@/data.json";
+
 export default function ProfilePage() {
   const books = data.books;
   const profile = data.profiles[0];
@@ -46,23 +46,23 @@ export default function ProfilePage() {
       content: (
         <div className="flex flex-col justify-center">
           <Label className="mt-16 mb-8">함께 읽은 책</Label>
-          <BookList
+          {/* <BookList
             books={books.map((book) => ({
               id: book.id,
               title: book.title,
               image: book.imageUrl,
               author: book.author,
             }))}
-          />
+          /> */}
           <Label className="mt-16 mb-8">진화 및 뇌 과학</Label>
-          <BookList
+          {/* <BookList
             books={books.map((book) => ({
               id: book.id,
               title: book.title,
               image: book.imageUrl,
               author: book.author,
             }))}
-          />
+          /> */}
         </div>
       ),
     },
@@ -79,7 +79,7 @@ export default function ProfilePage() {
 
   return (
     <div className="mt-14 max-w-[800px] mx-auto pt-14 mb-28">
-      <CardProfile image={profile.imageUrl}>
+      <CardProfile>
         <div className="flex flex-col items-center justify-center w-[400px] mx-auto line-clamp-1">
           <TextBlack className="text-2xl font-bold mt-4">
             {profile.name}

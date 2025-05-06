@@ -2,32 +2,23 @@
 
 import { useState } from "react";
 import {
-  TextComponents,
-  ProfileComponents,
-  Breather,
-  BookComponents,
-  IndexComponents,
   ButtonComponents,
+  BookComponents,
+  SoullineComponents,
+  ProfileComponents,
   CardComponents,
-  SoullineComponent,
-  InputComponents,
-  TabsComponent,
-  LabelComponents,
   IndicatorComponents,
-  MetaComponents,
 } from "@/components";
-import { Menu, Menu2, icons } from "@/components/menu";
-import { ItemComponents } from "@/components/item";
 
 const components = [
   {
     label: "book",
     component: <BookComponents />,
   },
-  {
-    label: "breather",
-    component: <Breather />,
-  },
+  // {
+  //   label: "breather",
+  //   component: <Breather />,
+  // },
   {
     label: "button",
     component: <ButtonComponents />,
@@ -36,73 +27,77 @@ const components = [
     label: "card",
     component: <CardComponents />,
   },
-  {
-    label: "index",
-    component: <IndexComponents />,
-  },
+  // {
+  //   label: "index",
+  //   component: <IndexComponents />,
+  // },
   {
     label: "indicator",
     component: <IndicatorComponents />,
   },
-  {
-    label: "input",
-    component: <InputComponents />,
-  },
-  {
-    label: "item",
-    component: <ItemComponents />,
-  },
-  {
-    label: "label",
-    component: <LabelComponents />,
-  },
-  {
-    label: "menu",
-    component: (
-      <div className="flex gap-16">
-        <div>
-          {icons.map((icon, index) => (
-            <Menu
-              key={index}
-              icon={icon.icon}
-              label={icon.label}
-              onClick={() => {}}
-            />
-          ))}
-        </div>
-        <div>
-          {icons.map((icon, index) => (
-            <Menu2
-              key={index}
-              icon={icon.icon}
-              label={icon.label}
-              onClick={() => {}}
-            />
-          ))}
-        </div>
-      </div>
-    ),
-  },
-  {
-    label: "meta",
-    component: <MetaComponents />,
-  },
+  // {
+  //   label: "input",
+  //   component: <InputComponents />,
+  // },
+  // {
+  //   label: "item",
+  //   component: <ItemComponents />,
+  // },
+  // {
+  //   label: "label",
+  //   component: <LabelComponents />,
+  // },
+  // {
+  //   label: "menu",
+  //   component: (
+  //     <div className="flex gap-16">
+  //       <div>
+  //         {icons.map((icon, index) => (
+  //           <Menu
+  //             key={index}
+  //             icon={icon.icon}
+  //             label={icon.label}
+  //             onClick={() => {}}
+  //           />
+  //         ))}
+  //       </div>
+  //       <div>
+  //         {icons.map((icon, index) => (
+  //           <Menu2
+  //             key={index}
+  //             icon={icon.icon}
+  //             label={icon.label}
+  //             onClick={() => {}}
+  //           />
+  //         ))}
+  //       </div>
+  //     </div>
+  //   ),
+  // },
+  // {
+  //   label: "meta",
+  //   component: <MetaComponents />,
+  // },
+  // {
+  //   label: "pop-card",
+  //   component: <PopCardComponents />,
+  // },
   {
     label: "profile",
     component: <ProfileComponents />,
   },
   {
     label: "soulline",
-    component: <SoullineComponent />,
+    component: <SoullineComponents />,
   },
-  {
-    label: "tabs",
-    component: <TabsComponent />,
-  },
-  {
-    label: "text",
-    component: <TextComponents />,
-  },
+  // {
+  //   label: "tabs",
+  //   component: <TabsComponent />,
+  // },
+  // {
+  //   label: "text",
+  //   component: <TextComponents />,
+  // },
 ];
 
 export default function Page() {
@@ -113,7 +108,7 @@ export default function Page() {
   );
 
   return (
-    <div className="flex flex-col items-center justify-start pt-10 w-full mx-auto mt-12 max-w-[900px]">
+    <div className="flex flex-col items-center justify-start pt-10 w-full mx-auto mt-12">
       <div className="flex space-x-4 mb-8 w-full items-center justify-center">
         {components.map((component) => (
           <span

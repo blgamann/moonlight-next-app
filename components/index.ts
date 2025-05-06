@@ -10,6 +10,7 @@ export * from "./item";
 export * from "./label";
 export * from "./menu";
 export * from "./meta";
+export * from "./pop-card";
 export * from "./profile";
 export * from "./soulline";
 export * from "./tabs";

@@ -1,10 +1,7 @@
-import {
-  CardSoullink,
-  CardSoullinkWaiting,
-  ProfileMdSoulmate,
-} from "@/components";
+import { CardSoullink, CardSoullinkWaiting } from "@/components";
 import { LabelLg } from "@/components/label";
 import data from "@/data.json";
+import { Profile } from "@/components/profile";
 
 export default function SoulLink() {
   const profiles = data.profiles;
@@ -15,7 +12,9 @@ export default function SoulLink() {
         <LabelLg>나의 소울메이트</LabelLg>
         <div className="mt-8 flex gap-4">
           {profiles.map((profile) => (
-            <ProfileMdSoulmate
+            <Profile
+              size="md"
+              variant="soulmate"
               key={profile.id}
               image={profile.imageUrl}
               name={profile.name}
