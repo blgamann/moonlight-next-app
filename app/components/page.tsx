@@ -7,7 +7,8 @@ import {
   SoullineComponents,
   ProfileComponents,
   CardComponents,
-  IndicatorComponents,
+  TextComponents,
+  TabsComponent,
 } from "@/components";
 
 const components = [
@@ -15,10 +16,6 @@ const components = [
     label: "book",
     component: <BookComponents />,
   },
-  // {
-  //   label: "breather",
-  //   component: <Breather />,
-  // },
   {
     label: "button",
     component: <ButtonComponents />,
@@ -27,61 +24,7 @@ const components = [
     label: "card",
     component: <CardComponents />,
   },
-  // {
-  //   label: "index",
-  //   component: <IndexComponents />,
-  // },
-  {
-    label: "indicator",
-    component: <IndicatorComponents />,
-  },
-  // {
-  //   label: "input",
-  //   component: <InputComponents />,
-  // },
-  // {
-  //   label: "item",
-  //   component: <ItemComponents />,
-  // },
-  // {
-  //   label: "label",
-  //   component: <LabelComponents />,
-  // },
-  // {
-  //   label: "menu",
-  //   component: (
-  //     <div className="flex gap-16">
-  //       <div>
-  //         {icons.map((icon, index) => (
-  //           <Menu
-  //             key={index}
-  //             icon={icon.icon}
-  //             label={icon.label}
-  //             onClick={() => {}}
-  //           />
-  //         ))}
-  //       </div>
-  //       <div>
-  //         {icons.map((icon, index) => (
-  //           <Menu2
-  //             key={index}
-  //             icon={icon.icon}
-  //             label={icon.label}
-  //             onClick={() => {}}
-  //           />
-  //         ))}
-  //       </div>
-  //     </div>
-  //   ),
-  // },
-  // {
-  //   label: "meta",
-  //   component: <MetaComponents />,
-  // },
-  // {
-  //   label: "pop-card",
-  //   component: <PopCardComponents />,
-  // },
+
   {
     label: "profile",
     component: <ProfileComponents />,
@@ -90,14 +33,14 @@ const components = [
     label: "soulline",
     component: <SoullineComponents />,
   },
-  // {
-  //   label: "tabs",
-  //   component: <TabsComponent />,
-  // },
-  // {
-  //   label: "text",
-  //   component: <TextComponents />,
-  // },
+  {
+    label: "text",
+    component: <TextComponents />,
+  },
+  {
+    label: "tabs",
+    component: <TabsComponent />,
+  },
 ];
 
 export default function Page() {

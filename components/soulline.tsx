@@ -4,7 +4,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import data from "@/data.json";
 import { Profile, SizeKey, SIZE_MAP, MAX_BORDER } from "./profile";
-import { PopCardHiddenProfiles } from "./pop-card";
 
 export interface SoullineProps {
   imageUrl: string;
@@ -118,14 +117,6 @@ export function Soulline({ profiles, size = "md" }: SoullinePropsList) {
                   +{item.count}
                 </span>
               </div>
-            )}
-            {item.type === "more" && activePopCardIndex === idx && (
-              <PopCardHiddenProfiles
-                profiles={item.hiddenProfiles.map((p) => ({
-                  imageUrl: p.imageUrl,
-                  name: p.altText || "",
-                }))}
-              />
             )}
           </div>
         ))}

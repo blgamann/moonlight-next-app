@@ -1,10 +1,5 @@
 import type { Metadata } from "next";
-import { helvetica } from "./fonts";
 import "./globals.css";
-import { Toaster } from "react-hot-toast";
-
-import { Header } from "@/components/header";
-import { Menus } from "@/components/menu";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,14 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${helvetica.className} font-normal bg-white`}>
-        <div className="fixed top-0 left-13 right-0 z-30">
-          <Header />
-        </div>
-        <Menus />
-        {children}
-        <Toaster />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
