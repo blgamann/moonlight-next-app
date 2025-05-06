@@ -1,30 +1,40 @@
-import { TextBlack, TextGradient, TextGrey } from "@/components/text";
-import { Input } from "@/components/input";
-import { Button } from "@/components/button";
-import { Breather } from "@/components/breather";
+"use client"
+
+import { useState, useEffect } from "react"
+import PasswordProtection from "@/components/password-protection"
+import VersionHistory from "@/components/version-history"
 
 export default function Home() {
-  return (
-    <div className="min-h-screen flex flex-col w-full mx-auto bg-white">
-      <div className="flex flex-col flex-grow justify-center items-center">
-        <TextGradient className="text-2xl">
-          책을 통해, 마음이 만나는 곳
-        </TextGradient>
-        <TextBlack className="text-2xl mt-4">
-          문 라이트에 오신 것을 환영합니다
-        </TextBlack>
-        <TextGrey className="text-base mt-9">
-          독후감을 공유하고 나의 소울 메이트를 찾아보세요
-        </TextGrey>
-        <Breather className="my-16" />
-        <TextBlack className="text-xl mb-9">
-          어떤 분이 추천해주셨나요?
-        </TextBlack>
-        <div className="w-full max-w-[50%] min-w-[300px]">
-          <Input placeholder="추천인의 ID를 입력해주세요" />
-        </div>
-        <Button className="mt-13">회원가입 시작하기</Button>
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    // Check if user is already authenticated
+    const auth = localStorage.getItem("auth")
+    if (auth === "true") {
+      setIsAuthenticated(true)
+    }
+    setIsLoading(false)
+  }, [])
+
+  const handleAuthentication = (success: boolean) => {
+    if (success) {
+      localStorage.setItem("auth", "true")
+      setIsAuthenticated(true)
+    }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="w-8 h-8 border-4 border-gray-300 border-t-black rounded-full animate-spin"></div>
       </div>
-    </div>
-  );
+    )
+  }
+
+  return (
+    <main className="min-h-screen bg-white">
+      {!isAuthenticated ? <PasswordProtection onAuthenticate={handleAuthentication} /> : <VersionHistory />}
+    </main>
+  )
 }
