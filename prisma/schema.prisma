@@ -1,0 +1,184 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// --- Temporary table for testing and seeding ---
+// This table mimics the response from the Naver Book API,
+// and is used by the seed script to populate the Book table.
+// This table may not be necessary in a real production environment.
+model SearchBook {
+  id          Int     @id @default(autoincrement())
+  title       String
+  link        String?
+  image       String?
+  author      String
+  discount    String? // Naver API는 문자열로 제공
+  publisher   String
+  pubdate     String? // YYYYMMDD 형식
+  isbn        String  @unique // ISBN은 고유해야 하며, Book 테이블과 연결하는 주요 키
+  description String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Book {
+  id         Int       @id @default(autoincrement())
+  isbn       String    @unique
+  title      String
+  author     String
+  image      String?
+  publisher  String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  shelves    Shelf[]
+  questions  Question[]
+}
+
+model Profile {
+  id               Int                    @id @default(autoincrement())
+  name             String
+  image            String?
+  bio              String?
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  shelves             Shelf[]
+  answers             Answer[]
+  profileInterests    ProfileInterest[]     @relation("ProfileInterestSource")
+  receivedInterests   ProfileInterest[]     @relation("ProfileInterestTarget")
+  answerInterests     AnswerInterest[]
+  soulLinksSent       SoulLink[]            @relation("SoulLinkSender")
+  soulLinksReceived   SoulLink[]            @relation("SoulLinkReceiver")
+  mutualInterestsA    MutualProfileInterest[] @relation("MutualProfileInterestA")
+  mutualInterestsB    MutualProfileInterest[] @relation("MutualProfileInterestB")
+  soulmatesA          Soulmate[]            @relation("SoulmateA")
+  soulmatesB          Soulmate[]            @relation("SoulmateB")
+}
+
+model Author {
+  id        Int    @id @default(autoincrement())
+  name      String
+  image     String?
+  bio       String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  // Metadata only; questions reference creatorType and creatorId
+}
+
+model Publisher {
+  id        String    @id @default(uuid())
+  name      String
+  image     String?
+  bio       String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  // Metadata only; questions reference creatorType and creatorId
+}
+
+model Shelf {
+  profile   Profile  @relation(fields: [profileId], references: [id])
+  profileId Int
+  book      Book     @relation(fields: [bookId], references: [id])
+  bookId    Int
+  addedAt   DateTime @default(now())
+
+  @@id([profileId, bookId])
+}
+
+model Question {
+  id           Int       @id @default(autoincrement())
+  book         Book      @relation(fields: [bookId], references: [id])
+  bookId       Int
+  questionText String
+  creatorType  String
+  creatorId    String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  answers      Answer[]
+}
+
+model Answer {
+  id         Int       @id @default(autoincrement())
+  question   Question  @relation(fields: [questionId], references: [id])
+  questionId Int
+  profile    Profile   @relation(fields: [profileId], references: [id])
+  profileId  Int
+  title      String
+  answerText String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  interests  AnswerInterest[]
+}
+
+model ProfileInterest {
+  id                Int       @id @default(autoincrement())
+  sourceProfile     Profile   @relation("ProfileInterestSource", fields: [sourceProfileId], references: [id])
+  sourceProfileId   Int
+  targetProfile     Profile   @relation("ProfileInterestTarget", fields: [targetProfileId], references: [id])
+  targetProfileId   Int
+  createdAt         DateTime  @default(now())
+  canceledAt        DateTime?
+
+  @@unique([sourceProfileId, targetProfileId, canceledAt], name: "unique_active_profile_interest")
+}
+
+model AnswerInterest {
+  id        Int       @id @default(autoincrement())
+  profile   Profile   @relation(fields: [profileId], references: [id])
+  profileId Int
+  answer    Answer    @relation(fields: [answerId], references: [id])
+  answerId  Int
+  createdAt DateTime  @default(now())
+  canceledAt DateTime?
+
+  @@unique([profileId, answerId, canceledAt], name: "unique_active_answer_interest")
+}
+
+model MutualProfileInterest {
+  id            Int       @id @default(autoincrement())
+  userA         Profile   @relation("MutualProfileInterestA", fields: [userAId], references: [id])
+  userAId       Int
+  userB         Profile   @relation("MutualProfileInterestB", fields: [userBId], references: [id])
+  userBId       Int
+  establishedAt DateTime  @default(now())
+  dissolvedAt   DateTime?
+
+  @@unique([userAId, userBId, dissolvedAt], name: "unique_active_mutual_profile_interest")
+}
+
+model SoulLink {
+  id                 Int       @id @default(autoincrement())
+  sender             Profile   @relation("SoulLinkSender", fields: [senderProfileId], references: [id])
+  senderProfileId    Int
+  receiver           Profile   @relation("SoulLinkReceiver", fields: [receiverProfileId], references: [id])
+  receiverProfileId  Int
+  createdAt          DateTime  @default(now())
+  canceledAt         DateTime?
+
+  @@unique([senderProfileId, receiverProfileId, canceledAt], name: "unique_active_soul_link")
+}
+
+model Soulmate {
+  id                Int       @id @default(autoincrement())
+  userA             Profile   @relation("SoulmateA", fields: [userAId], references: [id])
+  userAId           Int
+  userB             Profile   @relation("SoulmateB", fields: [userBId], references: [id])
+  userBId           Int
+  establishedAt     DateTime  @default(now())
+  lastInteractionAt DateTime  @default(now())
+  disbandedAt       DateTime?
+
+  @@unique([userAId, userBId, disbandedAt], name: "unique_active_soulmate")
+}

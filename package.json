@@ -2,14 +2,21 @@
   "name": "moonlight-next-app",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+    "seed": "ts-node -P tsconfig.prisma.json prisma/seed.ts"
+  },
   "scripts": {
     "dev": "npm install && next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "prisma db seed",
+    "prescenario": "npm run seed",
+    "scenario": "ts-node -P tsconfig.scripts.json scripts/${npm_config_name}.ts"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.8",
+    "@prisma/client": "^6.7.0",
     "framer-motion": "^12.9.2",
     "next": "15.3.1",
     "react": "^19.0.0",
@@ -20,12 +27,15 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^20.17.43",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^16.5.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
+    "prisma": "^6.7.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
