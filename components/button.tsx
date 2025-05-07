@@ -109,7 +109,7 @@ export function ButtonForward({ onClick }: { onClick?: () => void }) {
   );
 }
 
-export function ButtonDeep({
+export function ButtonInterest({
   className,
   toastMessage,
 }: {
@@ -259,8 +259,8 @@ export function ButtonComponents() {
         <ButtonCancel>Button</ButtonCancel>
       </div>
       <div>
-        <h1>ButtonDeep</h1>
-        <ButtonDeep toastMessage="관심 답변이 등록되었어요!" />
+        <h1>ButtonInterest</h1>
+        <ButtonInterest toastMessage="관심 답변이 등록되었어요!" />
       </div>
     </div>
   );
