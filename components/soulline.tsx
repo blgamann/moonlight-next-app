@@ -1,7 +1,7 @@
 // components/soulline.tsx
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import data from "@/data.json";
 import { Profile, SizeKey, SIZE_MAP, MAX_BORDER } from "./profile";
 
@@ -26,6 +26,10 @@ export function Soulline({ profiles, size = "md" }: SoullinePropsList) {
   );
   const soullineRef = useRef<HTMLDivElement>(null);
 
+  if (!profiles || profiles.length === 0) {
+    return <div>소울라인이 형성되지 않았습니다.</div>;
+  }
+
   // 아바타 크기 및 테두리 두께 계산
   const dimension = SIZE_MAP[size];
   const borderWidth = (dimension / SIZE_MAP.xl) * MAX_BORDER;
@@ -48,22 +52,22 @@ export function Soulline({ profiles, size = "md" }: SoullinePropsList) {
         ];
 
   // 바깥 클릭으로 팝카드 닫기
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (
-        soullineRef.current &&
-        !soullineRef.current.contains(e.target as Node)
-      ) {
-        setActivePopCardIndex(null);
-      }
-    }
-    if (activePopCardIndex !== null) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [activePopCardIndex]);
+  // useEffect(() => {
+  //   function handleClickOutside(e: MouseEvent) {
+  //     if (
+  //       soullineRef.current &&
+  //       !soullineRef.current.contains(e.target as Node)
+  //     ) {
+  //       setActivePopCardIndex(null);
+  //     }
+  //   }
+  //   if (activePopCardIndex !== null) {
+  //     document.addEventListener("mousedown", handleClickOutside);
+  //   }
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [activePopCardIndex]);
 
   return (
     <div
