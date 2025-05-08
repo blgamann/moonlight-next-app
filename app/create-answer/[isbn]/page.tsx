@@ -16,7 +16,7 @@ export default function CreateAnswerPage() {
   const params = useParams();
   const router = useRouter();
   const isbn = params.isbn as string;
-  
+
   const [book, setBook] = useState<BookDetails | null>(null);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -28,21 +28,21 @@ export default function CreateAnswerPage() {
       isbn,
       title: "달빛 정원",
       author: "김작가",
-      image: "https://i.pravatar.cc/300?img=10"
+      image: "https://i.pravatar.cc/300?img=10",
     });
-    
+
     setIsLoading(false);
   }, [isbn]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !content.trim()) return;
-    
+
     setIsSubmitting(true);
-    
+
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       router.push(`/garden/${isbn}`);
     } catch (error) {
       console.error("Error submitting answer:", error);
@@ -64,22 +64,21 @@ export default function CreateAnswerPage() {
   return (
     <div className="min-h-screen p-4 pb-20">
       <h1 className="text-xl font-bold mb-4">감상 공유하기</h1>
-      
+
       <div className="flex items-center gap-3 mb-6">
-        <Book
-          image={book.image}
-          size="md"
-        />
+        <Book image={book.image} size="md" />
         <div>
           <h2 className="font-semibold">{book.title}</h2>
           <p className="text-gray-600 text-sm">{book.author}</p>
         </div>
       </div>
-      
+
       <div className="mb-6">
-        <h3 className="font-medium mb-2">"{book.title}"에 대한 나의 느낌을 공유해주세요</h3>
+        <h3 className="font-medium mb-2">
+          {book.title}에 대한 나의 느낌을 공유해주세요
+        </h3>
       </div>
-      
+
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="title" className="block text-sm font-medium mb-1">
@@ -95,7 +94,7 @@ export default function CreateAnswerPage() {
             required
           />
         </div>
-        
+
         <div className="mb-6">
           <label htmlFor="content" className="block text-sm font-medium mb-1">
             내용
@@ -109,7 +108,7 @@ export default function CreateAnswerPage() {
             required
           />
         </div>
-        
+
         <button
           type="submit"
           className="w-full bg-[#39d4e7] text-white px-4 py-2 rounded-md"
@@ -118,7 +117,7 @@ export default function CreateAnswerPage() {
           {isSubmitting ? "제출 중..." : "감상 공유하기"}
         </button>
       </form>
-      
+
       <Navigation />
     </div>
   );
